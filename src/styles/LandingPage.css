@@ -1,0 +1,122 @@
+/* src/styles/LandingPage.css */
+.landing-page {
+    text-align: center;
+    padding: 20px;
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
+    
+  }
+  
+  header {
+    background-color: #FFFFFF;
+    color: #000000;
+    padding: 50px 0;
+    padding: 20px;
+    
+  }
+
+ 
+  header h3 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  header p {
+    font-size: 1.2rem;
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  .cta {
+    margin-top: 30px;
+  }
+
+  .get-started-btn {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #0B6477;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 20px;
+    width: 100%;
+  }
+
+  .get-started-btn:hover {
+    background-color: #0AD1C8;
+  }
+
+  .login-a {
+    color:#0B6477 ;
+  }
+  
+
+  
+
+  footer {
+    margin-top: 50px;
+    font-size: 1rem;
+    color: #555;
+  }
+
+  @media (max-width: 768px) {
+    .landing-page {
+        width: 100%;
+        height: 100vh;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffffff; /* Optional if you need a background */
+    }
+
+    header img {
+        width: 60%; /* Adjusts logo size */
+        margin-bottom: 20px;
+    }
+
+    header h3 {
+        font-size: 1.8rem;
+        line-height: 2.2rem;
+        margin-bottom: 10px;
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    header p {
+        font-size: 1rem;
+        margin-bottom: 30px;
+        text-align: center;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .cta button {
+        width: 90%;
+        max-width: 300px;
+        padding: 15px;
+        font-size: 1rem;
+        border-radius: 25px;
+        background-color: #0B6477;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .cta button:hover {
+        background-color: #0AD1C8;
+    }
+
+    .login-a {
+        margin-top: 15px;
+        color: #0B6477;
+        font-size: 0.9rem;
+    }
+}
+
+
+  
