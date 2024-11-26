@@ -1,6 +1,6 @@
 /* src/styles/LandingPage.css */
 
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 .landing-page {
     background-image: url('../assets/cover.png');
@@ -13,6 +13,7 @@
     overflow: hidden;
     padding: 35px;
     padding-left: 100px;
+    font-family: 'Poppins', sans-serif;
     
   
     

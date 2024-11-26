@@ -1,23 +1,26 @@
 import React from 'react';
-import '../styles/Login.css';
+import '../styles/Signup.css';
 import PersonGear from '../assets/person-gear.png';
 import { Link } from 'react-router-dom';
 
-const Login  = () =>  {
+
+const Signup  = () =>  {
     return (
         <div className='login'>
             <section className='content'>
                 
                 <img src={PersonGear} alt="Icon" />
-                <h1 className='font-sans text-xl'>LOGIN</h1>
-                <label>User ID</label>
-                <input className='user-id' placeholder='Enter your user ID'></input>
+                <h1 className='font-sans text-xl'>SIGN UP</h1>
+                <label>Mobile Number</label>
+                <input className='user-id' placeholder='Enter your Mobile Number'></input>
                 <label>Password</label>
                 <input className='password' placeholder='Enter your Password'></input>
+                <label>Confirm Password</label>
+                <input className='confirm-password' placeholder='Confirm Password'></input>
 
               
                 <button className='login-btn'>Log In</button>
-                <p className='font-sans text-xl'>Don't have an account? <Link to='/signup' className='signup-a'>Sign Up</Link></p>
+                <p className='font-sans text-xl'>Already have an account? <Link to='/login' className='login-a'>Log in</Link></p>
             
             </section>
             
@@ -26,4 +29,4 @@ const Login  = () =>  {
     );
 };
 
-export default Login;
+export default Signup;

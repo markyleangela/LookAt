@@ -5,6 +5,7 @@ import About from './pages/About';
 import Profile from './pages/Profile';
 import ErrorPage  from './pages/ErrorPage';
 import Login  from './pages/Login';
+import Signup from './pages/Signup';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="*" element={<ErrorPage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </BrowserRouter>
     </>
