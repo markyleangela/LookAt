@@ -1,10 +1,22 @@
 /* src/styles/LandingPage.css */
+body {
+  background-image: url('../assets/cover.png');
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center; 
+  margin: 0;
+  width: 100%;
+  height: 100%; 
+  overflow: hidden;
+}
+
+
 .landing-page {
-    text-align: center;
-    padding: 20px;
-    width: 30%;
-    margin-left: 35%;
-    margin-right: 35%;
+    
+    padding: 35px;
+    padding-left: 100px;
+    width: 100%;
+  
     
   }
   
@@ -16,23 +28,56 @@
     
   }
 
- 
-  header h3 {
+
+
+  .navbar {
+    display: flex;
+    
+    top: 0; 
+    left: 0; 
+    padding: 10px; 
+    width: 100%;
+
+  }
+  
+  .navbar img {
+    height: auto;
+    width: 200px;
+  }
+  .logo {
+    
+    align-self: flex-start;
+  }
+  
+  .cta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: justify;
+    
+    top: 0; 
+    left: 0; 
+    padding: 10px; 
+    width: 30%;
+
+    
+  }
+
+  .cta h3 {
     font-size: 3rem;
     margin-bottom: 10px;
     text-align: left;
     font-family: 'Poppins', sans-serif;
   }
-  
-  header p {
+
+    
+  .cta p {
     font-size: 1.2rem;
     text-align: left;
     font-family: 'Poppins', sans-serif;
   }
-  
-  .cta {
-    margin-top: 30px;
-  }
+
 
   .get-started-btn {
     padding: 10px 20px;
@@ -41,7 +86,7 @@
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 20px;
+    border-radius: 15px;
     width: 100%;
   }
 
@@ -61,62 +106,5 @@
     font-size: 1rem;
     color: #555;
   }
-
-  @media (max-width: 768px) {
-    .landing-page {
-        width: 100%;
-        height: 100vh;
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: #ffffff; /* Optional if you need a background */
-    }
-
-    header img {
-        width: 60%; /* Adjusts logo size */
-        margin-bottom: 20px;
-    }
-
-    header h3 {
-        font-size: 1.8rem;
-        line-height: 2.2rem;
-        margin-bottom: 10px;
-        text-align: center;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    header p {
-        font-size: 1rem;
-        margin-bottom: 30px;
-        text-align: center;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .cta button {
-        width: 90%;
-        max-width: 300px;
-        padding: 15px;
-        font-size: 1rem;
-        border-radius: 25px;
-        background-color: #0B6477;
-        color: white;
-        border: none;
-        cursor: pointer;
-    }
-
-    .cta button:hover {
-        background-color: #0AD1C8;
-    }
-
-    .login-a {
-        margin-top: 15px;
-        color: #0B6477;
-        font-size: 0.9rem;
-    }
-}
-
 
   
