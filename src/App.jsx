@@ -7,6 +7,8 @@ import ErrorPage  from './pages/ErrorPage';
 import Login  from './pages/Login';
 import Signup from './pages/Signup';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import MobileVerification from './pages/MobileVerification';
+import AccountCreated from './pages/AccountCreated';
 
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/mobile-verification" element={<MobileVerification />} />
+          <Route path="/account-created" element={<AccountCreated />} />
         </Routes>
       </BrowserRouter>
     </>
