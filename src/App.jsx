@@ -22,9 +22,10 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="*" element={<ErrorPage />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/register" element={<Signup />} />
           <Route path="/mobile-verification" element={<MobileVerification />} />
           <Route path="/account-created" element={<AccountCreated />} />
+          <Route path="/register" element={<Signup />} />
         </Routes>
       </BrowserRouter>
     </>
