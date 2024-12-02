@@ -34,26 +34,13 @@ const Signup  = () =>  {
 
   
 
-        const userData = {
-                    userDto: {
-                        userId: 0,
-                        userName: "string",
-                        firstName: "string",
-                        lastName: "string",
-                        password: password,
-                        mobileNumber: mobileNumber,
-                        date: "2024-11-30T13:11:38.086Z",
-                        physicalIdNumber: "string",
-                        purok: "string",
-                        barangayLoc: "string",
-                        cityMunicipality: "string",
-                        province: "string",
-                        email: "string",
-                        isVerified: false,
-                        barangayId: "string"
-                    },
-                    "otp": 0
-        }
+       const userData = {
+            userDto: {
+                mobileNumber,
+                password,
+            },
+            otp: "0",
+        };
 
         try {
             // Use registerUser from UserApi

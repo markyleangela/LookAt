@@ -1,4 +1,6 @@
+import React from 'react';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -6,9 +8,11 @@ import Profile from './pages/Profile';
 import ErrorPage  from './pages/ErrorPage';
 import Login  from './pages/Login';
 import Signup from './pages/Signup';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MobileVerification from './pages/MobileVerification';
 import AccountCreated from './pages/AccountCreated';
+import Help from './pages/Help';
+import Notifications from './pages/Notifications';
+
 
 
 function App() {
@@ -22,6 +26,9 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="*" element={<ErrorPage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/help" element={<Help />} />
+          <Route path="/notifications" element={<Notifications />} />
           <Route path="/register" element={<Signup />} />
           <Route path="/mobile-verification" element={<MobileVerification />} />
           <Route path="/account-created" element={<AccountCreated />} />

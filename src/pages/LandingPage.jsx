@@ -12,15 +12,15 @@ const LandingPage = () => {
         </nav>
       <header>
         
-     
-        
       </header>
       <main>
         <section className="cta">
         <h3 className='statement-1'>Streamline Your <br/> Barangay <br/> Transactions<br/> with LookAt</h3>
         <p className='statement-2'>Experience fast, simple, and organized document processing. From applications to appointments, LookAt keeps everything at your fingertips.</p>
-          <button className='get-started-btn'>Get Started</button>
-          <p>Already have an account? <Link to="Home" className='login-a'>Login</Link></p>
+          <Link>
+            <button className='get-started-btn'>Get Started</button>
+          </Link>
+          <p>Already have an account? <Link to="/login" className='login-a'>Login</Link></p>
         </section>
         
       </main>
