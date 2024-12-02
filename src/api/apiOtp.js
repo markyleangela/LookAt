@@ -1,34 +1,19 @@
 import axios from 'axios';
 
-const OTP_API_BASE_URL = process.env.REACT_APP_OTP_API_BASE_URL; 
-
-const apiOtp = axios.create({
-  baseURL: OTP_API_BASE_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
-
-
-apiOtp.interceptors.request.use((config) => {
-
-  console.log('Request sent to OTP API:', config);
-  return config;
-}, (error) => {
-  // Handle request error
-  console.error('Error in OTP API request:', error);
-  return Promise.reject(error);
-});
+// Use environment variable for API base URL
+const registerUser = async (userData) => {
+    try {
+        const response = await axios.post('https://localhost:7213/api/User', userData, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        return response;
+    } catch (error) {
+        console.error(error.response ? error.response.data : error.message);
+        throw error;
+    }
+};
 
 
-apiOtp.interceptors.response.use((response) => {
-
-  console.log('Response received from OTP API:', response);
-  return response;
-}, (error) => {
-  // Handle response error
-  console.error('Error in OTP API response:', error);
-  return Promise.reject(error);
-});
-
-export default apiOtp;
+export default registerUser;

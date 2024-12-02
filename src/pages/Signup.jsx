@@ -12,7 +12,7 @@ import {sendVerificationCode} from '../components/SendVerification'
 
 
 const Signup  = () =>  {
-    const [mobileNumber, setMobileNumber] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -22,7 +22,7 @@ const Signup  = () =>  {
         e.preventDefault();
 
         // Basic form validation
-        if (!mobileNumber || !password || !confirmPassword) {
+        if (!email || !password || !confirmPassword) {
             setErrorMessage('All fields are required.');
             return;
         }
@@ -41,14 +41,14 @@ const Signup  = () =>  {
                         firstName: "string",
                         lastName: "string",
                         password: password,
-                        mobileNumber: mobileNumber,
+                        mobileNumber: "string",
                         date: "2024-11-30T13:11:38.086Z",
                         physicalIdNumber: "string",
                         purok: "string",
                         barangayLoc: "string",
                         cityMunicipality: "string",
                         province: "string",
-                        email: "string",
+                        email: email,
                         isVerified: false,
                         barangayId: "string"
                     },
@@ -80,11 +80,11 @@ const Signup  = () =>  {
                 <h1 className='font-sans text-xl'>SIGN UP</h1>
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
                 <form onSubmit={handleSubmit}>
-                        <label>Mobile Number</label>
+                        <label>Email</label>
                         <input
                             type="text"
-                            value={mobileNumber}
-                            onChange={(e) => setMobileNumber(e.target.value)}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                         <label>Password</label>
                         <input
