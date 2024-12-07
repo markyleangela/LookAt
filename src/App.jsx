@@ -12,6 +12,8 @@ import MobileVerification from './pages/MobileVerification';
 import AccountCreated from './pages/AccountCreated';
 import Help from './pages/Help';
 import Notifications from './pages/Notifications';
+import BarangayLogin from './pages/barangayPage/BarangayLogin';
+import { BarangayRegister } from './pages/barangayPage/BarangayRegister';
 
 
 
@@ -33,6 +35,12 @@ function App() {
           <Route path="/mobile-verification" element={<MobileVerification />} />
           <Route path="/account-created" element={<AccountCreated />} />
           <Route path="/register" element={<Signup />} />
+
+          {/* BarangayPage Route with protection but not for now*/}
+          
+          <Route path="/barangay/login" element={ <BarangayLogin /> }/>
+          <Route path="/barangay/register" element = { <BarangayRegister/>} />
+        
         </Routes>
       </BrowserRouter>
     </>
