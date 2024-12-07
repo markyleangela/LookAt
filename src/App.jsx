@@ -13,7 +13,11 @@ import AccountCreated from './pages/AccountCreated';
 import Help from './pages/Help';
 import Notifications from './pages/Notifications';
 import BarangayLogin from './pages/barangayPage/BarangayLogin';
-import { BarangayRegister } from './pages/barangayPage/BarangayRegister';
+import BarangayHome from './pages/barangayPage/BarangayHome';
+import { BarangayRegister } from './pages/BarangayRegister';
+import BarangayVerification from './pages/barangayPage/BarangayVerification';
+import BarangayRequests from './pages/barangayPage/BarangayRequests';
+import BarangayDocuments from './pages/barangayPage/BarangayDocuments';
 
 
 
@@ -40,6 +44,10 @@ function App() {
           
           <Route path="/barangay/login" element={ <BarangayLogin /> }/>
           <Route path="/barangay/register" element = { <BarangayRegister/>} />
+          <Route path="/barangay/home" element= {<BarangayHome />} />
+          <Route path="/barangay/documents" element= {<BarangayDocuments />} />
+          <Route path="/barangay/requests" element= {<BarangayRequests />} />
+          <Route path="/barangay/verification" element= {<BarangayVerification />} />
         
         </Routes>
       </BrowserRouter>

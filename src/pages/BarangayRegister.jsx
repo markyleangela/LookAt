@@ -161,7 +161,7 @@ export const BarangayRegister = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
+    <div className="flex justify-center items-center h-screen bg-gray-3   00">
       <div className="w-full max-w-md">
         <RegisterForm />
       </div>
