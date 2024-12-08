@@ -1,6 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import barangayService from '../api/barangayService';
 
 export const BarangayRegister = () => {
   const RegisterForm = () => {
@@ -20,9 +21,16 @@ export const BarangayRegister = () => {
         cityMunicipality: Yup.string().required('City/Municipality is required'),
         province: Yup.string().required('Province is required'),
       }),
-      onSubmit: (values) => {
-        alert(JSON.stringify(values, null, 2));
-      },
+      onSubmit: async (values) => {
+        try {
+          const response = await barangayService.createBarangay(values);
+          alert('Barangay registered successfully');
+          console.log('Response:', response);
+        } catch (error) {
+          alert('Error registering barangay');
+          console.error('Error: ', error);
+        }
+      }
     });
 
     return (

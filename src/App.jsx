@@ -19,8 +19,6 @@ import BarangayVerification from './pages/barangayPage/BarangayVerification';
 import BarangayRequests from './pages/barangayPage/BarangayRequests';
 import BarangayDocuments from './pages/barangayPage/BarangayDocuments';
 
-
-
 function App() {
   return (
     <>
@@ -44,10 +42,11 @@ function App() {
           
           <Route path="/barangay/login" element={ <BarangayLogin /> }/>
           <Route path="/barangay/register" element = { <BarangayRegister/>} />
-          <Route path="/barangay/home" element= {<BarangayHome />} />
-          <Route path="/barangay/documents" element= {<BarangayDocuments />} />
-          <Route path="/barangay/requests" element= {<BarangayRequests />} />
-          <Route path="/barangay/verification" element= {<BarangayVerification />} />
+          <Route path="/barangay/:id/home" element={ <BarangayHome /> } />
+          <Route path="/barangay/:id/documents" element={ <BarangayDocuments /> } />
+          <Route path="/barangay/:id/requests" element={ <BarangayRequests /> } />
+          <Route path="/barangay/:id/verification" element={ <BarangayVerification /> } />
+
         
         </Routes>
       </BrowserRouter>

@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
-const AdminNavbar = () => {
+const AdminNavbar = ({ barangayData }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const NavItem = ({ icon: Icon, text, to }) => (
@@ -67,7 +67,7 @@ const AdminNavbar = () => {
         justify-center
       ">
         {!isCollapsed ? (
-          <h2 className="text-xl font-bold text-gray-800">Lookat Admin</h2>
+          <h2 className="text-xl font-bold text-gray-800">Barangay {barangayData.barangayLoc}</h2>
         ) : (
           <div className="w-10 h-10 bg-blue-500 rounded-full"></div>
         )}
@@ -75,10 +75,10 @@ const AdminNavbar = () => {
 
       {/* Navigation Items */}
       <nav className="flex-1 pt-4">
-        <NavItem icon={Home} text="Home" to="/barangay/home" />
-        <NavItem icon={FileText} text="Documents" to="/barangay/documents" />
-        <NavItem icon={CheckCircle} text="Verification" to="/barangay/verification" />
-        <NavItem icon={List} text="Requests" to="/barangay/requests" />
+      <NavItem icon={Home} text="Home" to={`/barangay/${barangayData.barangayId}/home`} />
+      <NavItem icon={FileText} text="Documents" to={`/barangay/${barangayData.barangayId}/documents`} />
+      <NavItem icon={CheckCircle} text="Verification" to={`/barangay/${barangayData.barangayId}/verification`} />
+      <NavItem icon={List} text="Requests" to={`/barangay/${barangayData.barangayId}/requests`} />
       </nav>
 
       {/* Footer or Additional Info */}
