@@ -1,7 +1,8 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import barangayService from '../api/barangayService';
+import barangayService from '../../api/barangayService';
+import { Link } from 'react-router-dom'
 
 export const BarangayRegister = () => {
   const RegisterForm = () => {
@@ -164,12 +165,15 @@ export const BarangayRegister = () => {
         >
           Register
         </button>
+        <Link to="/barangay/login" className="text-accent1 font-medium hover:underline">
+          Log in here.
+        </Link>
       </form>
     );
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-3   00">
+    <div className="bg-accent1 flex justify-center items-center h-screen bg-gray-3 p-5">
       <div className="w-full max-w-md">
         <RegisterForm />
       </div>

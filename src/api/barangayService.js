@@ -41,9 +41,27 @@ const getBarangayById = async (id) => {
     }
 };
 
+const login = async (loginData) => {
+    try {
+        const response = await axios.post(`${API_URL}/auth/login`, loginData, {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+        });
+
+        if (response.data.token) {
+            localStorage.setItem('token', response.data.token);
+        }
+        
+        return response;
+    } catch (error) {
+        handleError(error);
+    }
+};
+
 const barangayService = {
     createBarangay,
     getBarangayById,
+    login,
 };
 
 export default barangayService;

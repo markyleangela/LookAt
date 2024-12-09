@@ -14,10 +14,11 @@ import Help from './pages/Help';
 import Notifications from './pages/Notifications';
 import BarangayLogin from './pages/barangayPage/BarangayLogin';
 import BarangayHome from './pages/barangayPage/BarangayHome';
-import { BarangayRegister } from './pages/BarangayRegister';
+import { BarangayRegister } from './pages/barangayPage/BarangayRegister';
 import BarangayVerification from './pages/barangayPage/BarangayVerification';
 import BarangayRequests from './pages/barangayPage/BarangayRequests';
 import BarangayDocuments from './pages/barangayPage/BarangayDocuments';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -42,10 +43,43 @@ function App() {
           
           <Route path="/barangay/login" element={ <BarangayLogin /> }/>
           <Route path="/barangay/register" element = { <BarangayRegister/>} />
-          <Route path="/barangay/:id/home" element={ <BarangayHome /> } />
-          <Route path="/barangay/:id/documents" element={ <BarangayDocuments /> } />
-          <Route path="/barangay/:id/requests" element={ <BarangayRequests /> } />
-          <Route path="/barangay/:id/verification" element={ <BarangayVerification /> } />
+
+
+          <Route 
+              path="/barangay/:id/home" 
+              element={
+                  <ProtectedRoute>
+                      <BarangayHome />
+                  </ProtectedRoute>
+              } 
+          />
+
+          <Route 
+              path="/barangay/:id/documents" 
+              element={
+                  <ProtectedRoute>
+                      <BarangayDocuments />
+                  </ProtectedRoute>
+              }
+          />
+
+          <Route 
+              path="/barangay/:id/requests" 
+              element={
+                  <ProtectedRoute>
+                      <BarangayRequests />
+                  </ProtectedRoute>
+              }
+          />
+          
+          <Route 
+              path="/barangay/:id/verification" 
+              element={
+                  <ProtectedRoute>
+                      <BarangayVerification />
+                  </ProtectedRoute>
+              }
+          />
 
         
         </Routes>
