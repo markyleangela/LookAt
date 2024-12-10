@@ -1,28 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import AdminNavbar from '../../components/AdminNavbar'
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import barangayService from '../../api/barangayService';
+import { useContext } from 'react';
+import { BarangayContext } from '../../contexts/BarangayContext';
+import AdminNavbar from '../../components/AdminNavbar';
 
 const BarangayHome = () => {
-
   const { id } = useParams();
-
-  const [barangayData, setBarangayData] = useState(null);
+  const { barangayData, fetchBarangay, error} = useContext(BarangayContext);
 
   useEffect(() => {
-    const fetchBarangay = async () => {
-      try {
-        const response = await barangayService.getBarangayById(id);
-        setBarangayData(response.data);
-      } catch (error) {
-        console.error('Error fetching barangay data: ', error);
-      }
-    };
-
-    if (id) {
-      fetchBarangay();
+    if (id && !barangayData) { 
+      fetchBarangay(id);
     }
-  }, [id]);
+  }, [id, barangayData, fetchBarangay]);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   if (!barangayData) {
     return <div>Loading...</div>;
@@ -31,7 +25,6 @@ const BarangayHome = () => {
   return (
     <div className="flex h-screen">
       <AdminNavbar barangayData={barangayData} />
-
       <div className="flex flex-1 items-center justify-center bg-gray-50">
         <div className="text-2xl font-semibold text-gray-700">
           <h2>{barangayData.barangayName}</h2>
@@ -43,6 +36,6 @@ const BarangayHome = () => {
       </div>
     </div>
   );
-}
+};
 
 export default BarangayHome;

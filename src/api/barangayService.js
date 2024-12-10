@@ -47,14 +47,12 @@ const login = async (loginData) => {
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true,
         });
-
-        if (response.data.token) {
-            localStorage.setItem('token', response.data.token);
-        }
-        
-        return response;
+        console.log('Login Response:', response.data);
+        return response.data;
     } catch (error) {
         handleError(error);
+        console.error('Error in login request:', error);
+        throw error;
     }
 };
 

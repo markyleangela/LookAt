@@ -37,7 +37,7 @@ const AdminNavbar = ({ barangayData }) => {
     // Clear any stored authentication data, like tokens or user info
     localStorage.removeItem('token'); // Assuming token is stored in localStorage
     // Redirect to login page
-    navigate('/login');
+    navigate('/barangay/login');
   };
 
   return (
