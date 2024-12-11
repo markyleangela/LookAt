@@ -34,15 +34,6 @@ const Signup  = () =>  {
 
   
 
-<<<<<<< HEAD
-       const userData = {
-            userDto: {
-                mobileNumber,
-                password,
-            },
-            otp: "0",
-        };
-=======
         const userData = {
                     userDto: {
                         userId: 0,
@@ -63,7 +54,6 @@ const Signup  = () =>  {
                     },
                     "otp": 0
         }
->>>>>>> 225552261cde9a97469f91a70746f99c38332cac
 
         try {
             // Use registerUser from UserApi
