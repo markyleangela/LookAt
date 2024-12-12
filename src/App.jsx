@@ -9,6 +9,7 @@ import Signup from './pages/Signup';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MobileVerification from './pages/MobileVerification';
 import AccountCreated from './pages/AccountCreated';
+import ForgotPassword from './pages/ForgotPassword';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
           <Route path="/mobile-verification" element={<MobileVerification />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/account-created" element={<AccountCreated />} />
           <Route path="/register" element={<Signup />} />
         </Routes>
