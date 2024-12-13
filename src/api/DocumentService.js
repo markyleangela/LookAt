@@ -38,9 +38,23 @@ const getDocument = async (id) => {
     }
 };
 
+const  updateDocument = async (id, values) => {
+    try {
+        const response = await axios.put(`${API_URL}/DocumentType/${id}` , values, {
+            withCredentials: true
+        });
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        handleError(error);
+        throw(error);
+    }
+}
+
 const documentService = {
     createDocument,
     getDocument,
+    updateDocument,
 };
 
 export default documentService;
