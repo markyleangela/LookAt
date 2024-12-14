@@ -8,7 +8,7 @@ import Profile from './pages/Profile';
 import ErrorPage  from './pages/ErrorPage';
 import Login  from './pages/Login';
 import Signup from './pages/Signup';
-import MobileVerification from './pages/MobileVerification';
+import EmailVerification from './pages/EmailVerification';
 import AccountCreated from './pages/AccountCreated';
 import Help from './pages/Help';
 import Notifications from './pages/Notifications';
@@ -29,8 +29,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/help" element={<Help />} />
           <Route path="/notifications" element={<Notifications />} />
-          <Route path="/register" element={<Signup />} />
-          <Route path="/mobile-verification" element={<MobileVerification />} />
+          <Route path="/email-verification" element={<EmailVerification />} />
           <Route path="/account-created" element={<AccountCreated />} />
           <Route path="/register" element={<Signup />} />
         </Routes>
