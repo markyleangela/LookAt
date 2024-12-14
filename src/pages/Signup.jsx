@@ -31,6 +31,8 @@ const Signup = () => {
             "email": email,
             "password": password
         };
+  
+
 
         try {
             // Use registerUser from UserApi
