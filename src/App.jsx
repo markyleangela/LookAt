@@ -10,10 +10,11 @@ import Profile from './pages/Profile';
 import ErrorPage from './pages/ErrorPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import EmailVerification from './pages/EmailVerification';
+import MobileVerification from './pages/MobileVerification';
 import AccountCreated from './pages/AccountCreated';
 import Help from './pages/Help';
-import Notifications from './pages/Notifications';
+import Notifications from './pages/Notifications.jsx';
+import Settings from './pages/Settings.jsx';
 import BarangayLogin from './pages/barangayPage/BarangayLogin';
 import BarangayHome from './pages/barangayPage/BarangayHome';
 import { BarangayRegister } from './pages/barangayPage/BarangayRegister';
@@ -36,6 +37,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/help" element={<Help />} />
         <Route path="/notifications" element={<Notifications />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
         <Route path="/mobile-verification" element={<MobileVerification />} />

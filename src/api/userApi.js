@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 // Use environment variable for API base URL
-const requestRegisterUser = async (userData) => {
+const registerUser = async (userData) => {
     try {
-        const response = await axios.post('https://localhost:7213/api/User/request-otp', userData, {
+        const response = await axios.post('https://localhost:7213/api/User', userData, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -16,4 +16,4 @@ const requestRegisterUser = async (userData) => {
 };
 
 
-export default requestRegisterUser;
+export default registerUser;

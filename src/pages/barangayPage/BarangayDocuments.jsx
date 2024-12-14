@@ -7,7 +7,6 @@ import AdminNavbar from '../../components/AdminNavbar';
 import { FilePlus } from 'lucide-react';
 import Modal from '../../components/AddDocumentModal';  // Import Modal Component
 import documentService from '../../api/DocumentService';
-import DocumentCard from '../../components/DocumentCard';
 
 const BarangayDocuments = () => {
   const { id } = useParams();
@@ -54,32 +53,34 @@ const BarangayDocuments = () => {
     }
   };
 
+  const DocumentCard = ({ document }) => (
+    <div className="bg-gray-200 shadow-md rounded-lg p-4 flex justify-between items-center hover:scale-110 active:bg-slate-100 h-28 w-28">
+      <p className="text-center">{document.documentName}</p>  {/* Example document rendering */}
+    </div>
+  );
+
   const DocumentAddCard = () => (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-      <div className="bg-gray-200 shadow-md rounded-lg p-4 flex justify-between items-center hover:scale-110 ml-3 active:bg-slate-100 h-56 w-48">
+      <div className="bg-gray-200 shadow-md rounded-lg p-4 flex justify-between items-center hover:scale-110 active:bg-slate-100 h-28 w-28">
         <button className="text-accent1 font-bold py-2 px-4 rounded" onClick={() => setIsModalOpen(true)}>
-          <FilePlus className="w-32 h-24" />
+          <FilePlus className="w-12 h-12" />
         </button>
       </div>
     </div>
   );
 
-
   return (
     <div className="flex h-screen">
       <AdminNavbar barangayData={barangayData} />
-      <div className="flex flex-1 items-start justify-start bg-gray-50 p-12 m-5">
+      <div className="flex flex-1 flex-col items-start justify-start bg-gray-50 p-12">
         {documents.map((document) => (
-          <DocumentCard
-            key={document.id}
-            document={document}
-          />
+          <DocumentCard key={document.id} document={document} />
         ))}
         <DocumentAddCard />
-        <Modal
-          isOpen={isModalOpen}
+        <Modal 
+          isOpen={isModalOpen} 
           closeModal={() => setIsModalOpen(false)}
-          handleAddDocument={handleAddDocument}
+          handleAddDocument={handleAddDocument} 
         />
       </div>
     </div>
