@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.settings-page {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.settings-card {
+    display: flex;
+    background-color: #ffffff;
+    border-radius: 10px;
+    min-width: 400px;
+    /* padding: 45px; */
+    height: auto;
+    margin: 2% 20%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: margin 0.3s, padding 0.3s;
+}
+
+/* Sidebar */
+.settings-sidebar {
+  background-color: #e9e9e9;
+  width: 25%;
+  min-width: 250px;
+  min-height: 550px;
+  padding: 45px 0 45px 45px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.settings-sidebar h2 {
+  font-size: 1.1em;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.settings-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.settings-sidebar li {
+  font-size: 1em;
+  margin: 10px 0;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #555;
+}
+
+.settings-sidebar li.active,
+.settings-sidebar li:hover {
+  background-color: #d8f0f4;
+  color: #00796b;
+}
+
+/* Main Content */
+.settings-content {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.settings-content h1 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #064553;
+}
+
+/* Form */
+.password-form {
+  width: 100%;
+  max-width: 500px;
+}
+
+.password-form label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #064553;
+}
+
+.password-form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 2px solid #0b6477;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.update-password-btn {
+  background-color: #00796b;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.update-password-btn:hover {
+  background-color: #004d40;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .settings-page {
+    flex-direction: column;
+  }
+
+  .settings-sidebar {
+    width: 100%;
+    box-shadow: none;
+    margin-bottom: 20px;
+  }
+
+  .settings-content {
+    padding: 20px;
+  }
+
+  .password-form input {
+    font-size: 0.9em;
+  }
+
+  .update-password-btn {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-sidebar {
+    padding: 15px;
+  }
+
+  .settings-content h1 {
+    font-size: 1.5em;
+  }
+}
