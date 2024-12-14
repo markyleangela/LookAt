@@ -120,7 +120,6 @@
   background-color: #004d40;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .settings-page {
     flex-direction: column;
