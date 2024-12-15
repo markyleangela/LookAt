@@ -5,7 +5,7 @@ import AddressSection from './RequestPage_02';
 import ReceivingSection from './RequestPage_03';
 import DocumentType from './RequestPage_04';
 import SummarySection from './RequestPage_05';
-import { useUser } from '../../context/UserContext'; // Import the useUser hook
+import { useUser } from '../../context/UserContext';
 
 const DocumentRequestForm = () => {
   const navigate = useNavigate();
@@ -123,12 +123,19 @@ const DocumentRequestForm = () => {
       {/* Stepper Progress Bar */}
       <div className="flex items-center w-full mb-6">
         {[...Array(5)].map((_, index) => (
-          <div
-            key={index}
-            className={`flex-1 h-2 rounded-full mx-3 ${index <= currentSection ? 'bg-accent1' : 'bg-gray-300'} transition-colors duration-300`}
-          />
-        ))}
+            <div
+                key={index}
+                className={`flex-1 h-2 rounded-full mx-3 ${
+                    currentSection === 4 
+                        ? 'bg-accent2'  // If the user is on the last section, all bars are accent2
+                        : index <= currentSection 
+                        ? 'bg-accent1'  // Up to the current section, bars are accent1
+                        : 'bg-gray-300' // Future sections are gray
+                } transition-colors duration-300`}
+            />
+          ))}
       </div>
+
 
       {/* Form content for the current section */}
       <div className="w-full flex justify-center">
