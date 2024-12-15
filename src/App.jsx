@@ -11,6 +11,9 @@ import ErrorPage from './pages/ErrorPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import EmailVerification from './pages/EmailVerification';
+import ForgotPassword from './pages/ForgotPassword';
+import  ForgotPasswordOTP from './pages/OTPForgotPassword';
+import  ChangePassword from './pages/ChangePassword';
 import AccountCreated from './pages/AccountCreated';
 import Help from './pages/Help';
 import Notifications from './pages/Notifications';
@@ -38,8 +41,11 @@ function App() {
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
-        <Route path="/mobile-verification" element={<MobileVerification />} />
+        <Route path="/email-verification" element={<EmailVerification />} />
         <Route path="/account-created" element={<AccountCreated />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/forgot-password-otp" element={<ForgotPasswordOTP />} />
+        <Route path="/change-password" element={<ChangePassword />} />
         <Route path="*" element={<ErrorPage />} />
 
         {/* Barangay-specific routes */}

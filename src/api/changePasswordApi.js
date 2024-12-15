@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 // Use environment variable for API base URL
-const loginUser = async (userData) => {
+const changePassword = async (userData) => {
     try {
-        const response = await axios.post(`https://localhost:7213/api/User/login`, userData, {
+        const response = await axios.put(`https://localhost:7213/api/User/change-password`, userData, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -15,4 +15,4 @@ const loginUser = async (userData) => {
     }
 };
 
-export default loginUser;
+export default changePassword;

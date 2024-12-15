@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import '../styles/MobileVerification.css';
-import MessageIcon from '../assets/message.png';
+import Vector from '../assets/Vector.png';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import BackButton from '../components/BackButton';
-import VerifyOtp from '../api/verifyOtp'; // Import the VerifyOtp function
+import PasswordVerify from '../api/passwordVerifyOtp'; // Import the VerifyOtp function
 
 const EmailVerification = () => {
     const [enteredCode, setEnteredCode] = useState('');  // State to store OTP input
@@ -44,34 +44,17 @@ const EmailVerification = () => {
         console.log(typeof intCode)
 
         const userData = {
-            "userDto": {
-              "userId": 0,
-              "userName": "N/A",
-              "firstName": "N/A",
-              "lastName": "N/A",
-              "password": password,
-              "mobileNumber": "N/A",
-              "date": "2024-12-12T11:14:38.581Z",
-              "physicalIdNumber": "N/A",
-              "purok": "N/A",
-              "barangayLoc": "N/A",
-              "cityMunicipality": "N/A",
-              "province": "N/A",
-              "email": email,
-              "isVerified": true,
-              "barangayId": "N/A"
-            },
             "otp": intCode
           };
 
         try {
             // Use VerifyOtp API to verify the OTP
-            const response = await VerifyOtp(userData);
+            const response = await PasswordVerify(userData);
 
             if (response.status === 200) {
                 // OTP verified successfully, redirect to account creation success page
-                navigate('/account-created', {
-                    state: { email, password }
+                navigate('/change-password', {
+                    state: { email }
                 });
             }
         } catch (error) {
@@ -86,8 +69,8 @@ const EmailVerification = () => {
                 <BackButton />
             </header>
             <section className='content-mobile'>
-                <img src={MessageIcon} alt="Verification Icon" />
-                <h1 className='font-sans text-xl'>Email Verification</h1>
+                <img src={Vector} alt="Verification Icon" />
+                <h1 className='font-sans text-xl'>Forgot Password</h1>
                 <p>Enter the Code sent to</p>
                 <p>{email}</p>  {/* Display the email the code was sent to */}
 
