@@ -4,12 +4,14 @@ import PersonGear from '../assets/person-gear.png';
 import { Link, useNavigate } from 'react-router-dom';
 import BackButton from '../components/BackButton';
 import LoginApi from '../api/loginApi'; // Import the API to make the login request
+import { useUser } from '../context/UserContext'; // Import the context
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate(); // To navigate after login
+    const { loginUser } = useUser(); // Access the loginUser function from context
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -31,11 +33,15 @@ const Login = () => {
             const response = await LoginApi(loginData);
 
             if (response.status === 200) {
-                // Assuming the response contains userId
-                const userId = response.data.userId;
-                console.log(userId);
+                // Assuming the response contains userId and other user details
+                const userData = response.data; // You can also include other details if needed
+                console.log(userData);
+                
+                // Store user data in context
+                loginUser(userData); 
+
                 // On success, redirect to the user's home page with their ID in the URL
-                navigate(`/${userId}/home`);
+                navigate(`/${userData.userId}/home`);
             } else {
                 setErrorMessage('Invalid User ID or Password.');
             }
