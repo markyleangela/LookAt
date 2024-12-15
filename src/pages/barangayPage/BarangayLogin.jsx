@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { BarangayContext } from '../../contexts/BarangayContext'; // Import the context
+import { BarangayContext } from '../../context/BarangayContext'; // Import the context
 
 const BarangayLogin = () => {
   const { loginBarangay } = useContext(BarangayContext); // Use context to get login function

@@ -12,8 +12,8 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import MobileVerification from './pages/MobileVerification';
 import ForgotPassword from './pages/ForgotPassword';
-import  ForgotPasswordOTP from './pages/OTPForgotPassword';
-import  ChangePassword from './pages/ChangePassword';
+import ForgotPasswordOTP from './pages/OTPForgotPassword';
+import ChangePassword from './pages/ChangePassword';
 import AccountCreated from './pages/AccountCreated';
 import Help from './pages/Help';
 import Notifications from './pages/Notifications.jsx';
@@ -29,113 +29,104 @@ import Request from './pages/requestPage/RequestPage';
 import { RequestProvider } from './pages/requestPage/RequestContext';
 import RequestPage_04 from './pages/requestPage/RequestPage_04';
 import RequestPage_05 from './pages/requestPage/RequestPage_05';
-import UserOrBarangay from './pages/UserOrBarangay';
 import AcceptedRequests from './components/request/AcceptedRequest';
-
 import FirstVerification from './pages/Verification/Verification';
- 
 
 // Import BarangayProvider
-import { BarangayProvider } from './contexts/BarangayContext';
+import { BarangayProvider } from './context/BarangayContext';
+
+// Import UserContext
+import { UserProvider } from './context/UserContext'; // Ensure the correct import path
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        {/* Public routes */}
-        <Route index element={<LandingPage />} />
+      {/* Wrap only user-related routes with UserProvider */}
+      <UserProvider>
+        <Routes>
+          {/* Public routes */}
+          <Route index element={<LandingPage />} />
+          <Route path="/:id/verification" element={<FirstVerification />} />
+          <Route path="/:id/about" element={<About />} />
+          <Route path="/:id/home" element={<Home />} />
+          <Route path="/:id/profile" element={<Profile />} />
+          <Route path="/:id/help" element={<Help />} />
+          <Route path="/:id/notifications" element={<Notifications />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Signup />} />
+          <Route path="/email-verification" element={<EmailVerification />} />
+          <Route path="/account-created" element={<AccountCreated />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/forgot-password-otp" element={<ForgotPasswordOTP />} />
+          <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="*" element={<ErrorPage />} />
 
-        <Route path="/<:id>/verification" element={<FirstVerification />} />
+          {/* Request-related routes wrapped in RequestProvider */}
+          <Route
+            path=":id/request/*"
+            element={
+              <RequestProvider>
+                <Routes>
+                  <Route path="" element={<Request />} />
+                  <Route path="04" element={<RequestPage_04 />} />
+                  <Route path="05" element={<RequestPage_05 />} />
+                </Routes>
+              </RequestProvider>
+            }
+          />
+        </Routes>
+      </UserProvider>
 
-        <Route path="/<:id>/about" element={<About />} />
-        <Route path="/<:id>/home" element={<Home />} />
-        <Route path="/<:id>/profile" element={<Profile />} />
-        <Route path="/<:id>/help" element={<Help />} />
-        <Route path="/<:id>/notifications" element={<Notifications />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Signup />} />
-        <Route path="/email-verification" element={<EmailVerification />} />
-        <Route path="/account-created" element={<AccountCreated />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/forgot-password-otp" element={<ForgotPasswordOTP />} />
-        <Route path="/change-password" element={<ChangePassword />} />
-        <Route path="*" element={<ErrorPage />} />
-        <Route path="/user-or-barangay" element={<UserOrBarangay />} />
+      {/* Wrap Barangay-related routes with BarangayProvider */}
+      <BarangayProvider>
+        <Routes>
+          {/* Barangay public routes */}
+          <Route path="/barangay/login" element={<BarangayLogin />} />
+          <Route path="/barangay/register" element={<BarangayRegister />} />
 
-        {/* Request-related routes wrapped in RequestProvider */}
-        <Route
-          path="/request/*"
-          element={
-            <RequestProvider>
-              <Routes>
-                <Route path="" element={<Request />} />
-                <Route path="04" element={<RequestPage_04 />} />
-                <Route path="05" element={<RequestPage_05 />} />
-              </Routes>
-            </RequestProvider>
-          }
-        />
-
-        {/* Barangay-specific routes */}
-        <Route path="/barangay/register" element={<BarangayRegister />} />
-
-        {/* Wrap Barangay-related routes with BarangayProvider */}
-        <Route
-          path="/barangay/*"
-          element={
-            <BarangayProvider>
-              <Routes>
-                {/* Public Barangay routes */}
-                <Route path="/login" element={<BarangayLogin />} />
-
-                
-                {/* Protected Barangay routes */}
-                <Route
-                  path="/:id/home"
-                  element={
-                    <ProtectedRoute>
-                      <BarangayHome />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/:id/documents"
-                  element={
-                    <ProtectedRoute>
-                      <BarangayDocuments />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/:id/requests"
-                  element={
-                    <ProtectedRoute>
-                      <BarangayRequests />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route
-                  path="/:id/verification"
-                  element={
-                    <ProtectedRoute>
-                      <BarangayVerification />
-                    </ProtectedRoute>
-                  }
-                />
-                <Route 
-                  path="/:id/requests/all"
-                  element={
-                    <ProtectedRoute>
-                      <AcceptedRequests/>
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
-            </BarangayProvider>
-          }
-        />
-      </Routes>
+          {/* Protected Barangay routes */}
+          <Route
+            path="/barangay/:id/home"
+            element={
+              <ProtectedRoute>
+                <BarangayHome />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/barangay/:id/documents"
+            element={
+              <ProtectedRoute>
+                <BarangayDocuments />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/barangay/:id/requests"
+            element={
+              <ProtectedRoute>
+                <BarangayRequests />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/barangay/:id/verification"
+            element={
+              <ProtectedRoute>
+                <BarangayVerification />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/barangay/:id/requests/all"
+            element={
+              <ProtectedRoute>
+                <AcceptedRequests />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </BarangayProvider>
     </BrowserRouter>
   );
 }

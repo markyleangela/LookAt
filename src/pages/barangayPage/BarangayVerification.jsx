@@ -2,7 +2,7 @@ import React from 'react'
 import AdminNavbar from '../../components/AdminNavbar'
 import { useParams } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
-import { BarangayContext } from '../../contexts/BarangayContext';
+import { BarangayContext } from '../../context/BarangayContext';
 
 const BarangayVerification = () => {
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { BarangayContext } from '../../contexts/BarangayContext';
+import { BarangayContext } from '../../context/BarangayContext.js';
 import requestService from '../../api/RequestService.js';
 
 const AcceptedRequestsHistory = () => {

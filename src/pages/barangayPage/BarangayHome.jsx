@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useContext } from 'react';
-import { BarangayContext } from '../../contexts/BarangayContext';
+import { BarangayContext } from '../../context/BarangayContext';
 import AdminNavbar from '../../components/AdminNavbar';
 
 const BarangayHome = () => {

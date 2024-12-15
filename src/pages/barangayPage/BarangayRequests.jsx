@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AdminNavbar from '../../components/AdminNavbar';
 import { useParams, useNavigate, useLocation } from 'react-router-dom'; // Import useNavigate
-import { BarangayContext } from '../../contexts/BarangayContext';
+import { BarangayContext } from '../../context/BarangayContext.js';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import Switch from '@mui/material/Switch';
