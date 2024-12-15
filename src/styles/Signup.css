@@ -1,0 +1,42 @@
+/* Ensure the body and html take the full height */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Set the main container to 100vh */
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content vertically */
+    align-items: center; /* Centers content horizontally */
+    height: 100vh; /* Full viewport height */
+    padding: 20px; /* Optional padding */
+}
+
+/* Adjust the content section to center the form and image */
+.content {
+    text-align: center;
+    width: 100%;
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 20px;
+}
+
+.login-btn {
+    margin-top: 20px;
+}
+
+.font-sans {
+    font-family: 'Poppins', sans-serif;
+}
+
+header {
+    width: 100%;
+}
+
+.back-arrow {
+    text-align: left;
+}
