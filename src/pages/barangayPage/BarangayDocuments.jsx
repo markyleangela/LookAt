@@ -5,9 +5,9 @@ import { useContext } from 'react';
 import { BarangayContext } from '../../contexts/BarangayContext';
 import AdminNavbar from '../../components/AdminNavbar';
 import { FilePlus } from 'lucide-react';
-import Modal from '../../components/AddDocumentModal';  // Import Modal Component
+import Modal from '../../components/documents/AddDocumentModal';  // Import Modal Component
 import documentService from '../../api/DocumentService';
-import DocumentCard from '../../components/DocumentCard';
+import DocumentCard from '../../components/documents/DocumentCard';
 
 const BarangayDocuments = () => {
   const { id } = useParams();
@@ -32,7 +32,7 @@ const BarangayDocuments = () => {
         }
       };
       fetchDocuments();
-  }, [barangayData]);  // Run when barangayData changes
+  }, [barangayData, documents]);  // Run when barangayData changes
 
   if (error) {
     return <div>Error: {error}</div>;
@@ -55,20 +55,18 @@ const BarangayDocuments = () => {
   };
 
   const DocumentAddCard = () => (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
       <div className="bg-gray-200 shadow-md rounded-lg p-4 flex justify-between items-center hover:scale-110 ml-3 active:bg-slate-100 h-56 w-48">
         <button className="text-accent1 font-bold py-2 px-4 rounded" onClick={() => setIsModalOpen(true)}>
           <FilePlus className="w-32 h-24" />
         </button>
       </div>
-    </div>
   );
 
 
   return (
     <div className="flex h-screen">
       <AdminNavbar barangayData={barangayData} />
-      <div className="flex flex-1 items-start justify-start bg-gray-50 p-12 m-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 py-20 px-5 mx-auto">
         {documents.map((document) => (
           <DocumentCard
             key={document.id}

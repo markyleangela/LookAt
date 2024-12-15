@@ -42,7 +42,7 @@ function App() {
         <Route path="/notifications" element={<Notifications />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
-        <Route path="/mobile-verification" element={<MobileVerification />} />
+        <Route path="/email-verification" element={<EmailVerification />} />
         <Route path="/account-created" element={<AccountCreated />} />
         <Route path="*" element={<ErrorPage />} />
 
