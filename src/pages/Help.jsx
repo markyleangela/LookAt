@@ -1,9 +1,11 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../context/UserContext'; // Import the user context
 
 const Help = () => {
   const navigate = useNavigate();
+  const { user } = useUser(); // Access the user context
 
   const steps = [
     { name: 'Step 1:', message: 'Select purpose of appointment' },
@@ -44,15 +46,22 @@ const Help = () => {
           <h1 className="font-bold text-xl md:text-2xl lg:text-3xl text-accent1">
             Welcome to Lookat
           </h1>
-          <p className="text-sm sm:text-md md:text-lg lg:text-xl">
-            Steps to take in filling the request:
-          </p>
+          {user && (
+            <p className="text-sm sm:text-md md:text-lg lg:text-xl text-accent1">
+              Hello, {user.name}! Here are the steps to fill out your request:
+            </p>
+          )}
+          {!user && (
+            <p className="text-sm sm:text-md md:text-lg lg:text-xl text-accent1">
+              Steps to take in filling the request:
+            </p>
+          )}
           <div className="w-full">{renderSteps()}</div>
           <button
-            onClick={() => navigate('/about')}
+            onClick={() => navigate(user ? `/user/${user.userNumber}/request` : '/about')}
             className="
               bg-accent1 text-white text-sm sm:text-md md:text-lg lg:text-xl
-              px-3 py-2  md:px-6 md:py-2 lg:px-8 lg:py-2
+              px-3 py-2 md:px-6 md:py-2 lg:px-8 lg:py-2
               mt-4 w-full rounded-lg hover:bg-opacity-80
             "
           >
