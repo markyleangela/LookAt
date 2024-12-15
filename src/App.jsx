@@ -30,6 +30,7 @@ import RequestPage_04 from './pages/requestPage/RequestPage_04';
 import RequestPage_05 from './pages/requestPage/RequestPage_05';
 import AcceptedRequests from './components/request/AcceptedRequest';
 import FirstVerification from './pages/Verification/Verification';
+import UserOrBarangay from './pages/UserOrBarangay';
 
 // Import BarangayProvider
 import { BarangayProvider } from './context/BarangayContext';
@@ -59,6 +60,7 @@ function App() {
           <Route path="/forgot-password-otp" element={<ForgotPasswordOTP />} />
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="*" element={<ErrorPage />} />
+          <Route path="/user-or-barangay" element={<UserOrBarangay />}/>
 
           {/* Request-related routes wrapped in RequestProvider */}
           <Route
