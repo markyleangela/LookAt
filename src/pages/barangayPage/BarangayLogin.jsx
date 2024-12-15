@@ -6,8 +6,6 @@ import { BarangayContext } from '../../contexts/BarangayContext'; // Import the 
 const BarangayLogin = () => {
   const { loginBarangay } = useContext(BarangayContext); // Use context to get login function
 
-  console.log(`oten ni: ${loginBarangay}`)
-
   // Formik setup
   const formik = useFormik({
     initialValues: {

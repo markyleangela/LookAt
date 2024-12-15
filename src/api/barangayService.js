@@ -63,3 +63,5 @@ const barangayService = {
 };
 
 export default barangayService;
+
+

@@ -28,6 +28,7 @@ import Request from './pages/requestPage/RequestPage';
 import { RequestProvider } from './pages/requestPage/RequestContext';
 import RequestPage_04 from './pages/requestPage/RequestPage_04';
 import RequestPage_05 from './pages/requestPage/RequestPage_05';
+import AcceptedRequests from './components/request/AcceptedRequest';
 
 import FirstVerification from './pages/Verification/Verification';
  
@@ -42,13 +43,13 @@ function App() {
         {/* Public routes */}
         <Route index element={<LandingPage />} />
 
-        <Route path="/verification" element={<FirstVerification />} />
+        <Route path="/<:id>/verification" element={<FirstVerification />} />
 
-        <Route path="/about" element={<About />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/help" element={<Help />} />
-        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/<:id>/about" element={<About />} />
+        <Route path="/<:id>/home" element={<Home />} />
+        <Route path="/<:id>/profile" element={<Profile />} />
+        <Route path="/<:id>/help" element={<Help />} />
+        <Route path="/<:id>/notifications" element={<Notifications />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
         <Route path="/email-verification" element={<EmailVerification />} />
@@ -115,6 +116,14 @@ function App() {
                   element={
                     <ProtectedRoute>
                       <BarangayVerification />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route 
+                  path="/:id/requests/all"
+                  element={
+                    <ProtectedRoute>
+                      <AcceptedRequests/>
                     </ProtectedRoute>
                   }
                 />

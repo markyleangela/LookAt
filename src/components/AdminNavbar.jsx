@@ -1,87 +1,97 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Home, 
-  FileText, 
-  CheckCircle, 
-  List, 
-  Menu, 
-  X,
-  LogOut
-} from 'lucide-react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import {
+  Home,
+  FileText,
+  CheckCircle,
+  List,
+  Menu,
+  ChevronLeft,
+  LogOut,
+  ChevronRight,
+} from "lucide-react";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const AdminNavbar = ({ barangayData }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   // Handle responsive behavior
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setIsCollapsed(true);
-      } else {
-        setIsCollapsed(false);
-        setIsMobileMenuOpen(false); // Ensure the mobile menu closes on resizing
-      }
+      const isMobileView = window.innerWidth < 768;
+      setIsMobile(isMobileView);
+      setIsCollapsed(isMobileView); // Collapse sidebar for mobile
     };
 
-    // Add event listener
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     handleResize(); // Initial check
 
-    // Cleanup
-    return () => window.removeEventListener('resize', handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const NavItem = ({ icon: Icon, text, to, onClick, className = '' }) => (
+  const NavItem = ({ icon: Icon, text, to, onClick, className = "" }) => (
     <NavLink
       to={to}
       onClick={(e) => {
         onClick && onClick(e);
         setIsMobileMenuOpen(false); // Close mobile menu after navigation
       }}
-      className={({ isActive }) => `
+      className={({ isActive }) =>
+        `
         flex items-center 
-        p-3 
+        p-5
         cursor-pointer 
         hover:bg-gray-100 
-        ${isActive ? 'bg-blue-50 text-blue-600' : 'text-gray-600'}
-        transition-colors duration-200
-        ${className}
-      `}
+        ${
+          isActive ? "bg-blue-50 text-blue-600" : "text-slate-800"
+        } transition-colors duration-200 ${className}
+      `
+      }
     >
-      <div className={`flex items-center ${isCollapsed ? 'justify-center' : ''}`}>
-        <Icon className={`${!isCollapsed ? 'mr-3' : ''}`} size={20} />
-        {!isCollapsed && <span className="text-sm font-medium">{text}</span>}
+      <div
+        className={`flex items-center ${
+          isCollapsed && !isMobile ? "justify-center" : ""
+        }`}
+      >
+        <Icon
+          className={`${(!isCollapsed || isMobile) ? "mr-3" : ""}`}
+          size={20}
+        />
+        {(!isCollapsed || isMobile) && (
+          <span className="text-sm font-medium">{text}</span>
+        )}
       </div>
     </NavLink>
   );
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/barangay/login');
+    localStorage.removeItem("token");
+    navigate("/barangay/login");
   };
 
   return (
     <>
       {/* Mobile Hamburger Menu for small screens */}
-      <div className="md:hidden fixed top-4 left-4 z-50">
-        <button 
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="bg-white p-2 rounded-lg shadow-md focus:outline-none"
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
+      {!isMobileMenuOpen && isMobile && (
+        <div className="fixed top-4 left-4 z-50 w-28">
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden lg:hidden bg-accent1 text-white p-2 rounded-lg shadow-md focus:outline-none"
+          >
+            <Menu size={24} />
+          </button>
+        </div>
+      )}
 
       {/* Mobile Overlay Menu */}
       {isMobileMenuOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40"
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          <div 
+          <div
             className="bg-white w-64 h-full shadow-lg"
             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
           >
@@ -89,65 +99,63 @@ const AdminNavbar = ({ barangayData }) => {
               <h2 className="text-xl font-bold text-gray-800">
                 Barangay {barangayData.barangayLoc}
               </h2>
-              <button 
+              <button
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-gray-600 focus:outline-none"
               >
-                <X size={24} />
+                <ChevronLeft size={24} />
               </button>
             </div>
             <nav className="flex flex-col">
-              <NavItem 
-                icon={Home} 
-                text="Home" 
-                to={`/barangay/${barangayData.barangayId}/home`} 
+              <NavItem
+                icon={Home}
+                text="Home"
+                to={`/barangay/${barangayData.barangayId}/home`}
               />
-              <NavItem 
-                icon={FileText} 
-                text="Documents" 
-                to={`/barangay/${barangayData.barangayId}/documents`} 
+              <NavItem
+                icon={FileText}
+                text="Documents"
+                to={`/barangay/${barangayData.barangayId}/documents`}
               />
-              <NavItem 
-                icon={CheckCircle} 
-                text="Verification" 
-                to={`/barangay/${barangayData.barangayId}/verification`} 
+              <NavItem
+                icon={CheckCircle}
+                text="Verification"
+                to={`/barangay/${barangayData.barangayId}/verification`}
               />
-              <NavItem 
-                icon={List} 
-                text="Requests" 
-                to={`/barangay/${barangayData.barangayId}/requests`} 
+              <NavItem
+                icon={List}
+                text="Requests"
+                to={`/barangay/${barangayData.barangayId}/requests`}
               />
-              <NavItem 
-                icon={LogOut} 
-                text="Logout" 
-                to="/" 
-                onClick={handleLogout} 
-              />
+              <NavItem icon={LogOut} text="Logout" to="/" onClick={handleLogout} />
             </nav>
           </div>
         </div>
       )}
 
       {/* Desktop Sidebar */}
-      <div className={`
+      <div
+        className={`
         hidden 
         md:flex 
         bg-white 
         border-r 
         h-screen 
-        flex-col 
-        ${isCollapsed ? 'w-20' : 'w-64'}
+        flex-col
+        p-1
+        ${isCollapsed ? "w-20" : "w-64"}
         transition-all 
         duration-300 
         relative
         overflow-y-auto
-      `}>
+      `}
+      >
         {/* Collapse/Expand Button */}
-        <button 
+        <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="absolute top-4 right-5 z-10 bg-gray-100 p-1 rounded-full hover:bg-gray-200 focus:outline-none"
+          className="absolute top-4 right-5 z-10 bg-gray-300 p-2 rounded-full hover:bg-gray-500 focus:outline-none"
         >
-          {isCollapsed ? <Menu size={20} /> : <X size={20} />}
+          {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
         </button>
 
         {/* Logo or Title */}
@@ -157,38 +165,33 @@ const AdminNavbar = ({ barangayData }) => {
               Barangay {barangayData.barangayLoc}
             </h2>
           ) : (
-            <div className="w-10 h-10 bg-blue-500 rounded-full"></div>
+            <div className="w-10 h-10 rounded-full ml-2"></div>
           )}
         </div>
 
         {/* Navigation Items */}
         <nav className="flex-1 pt-4 p-2">
-          <NavItem 
-            icon={Home} 
-            text="Home" 
-            to={`/barangay/${barangayData.barangayId}/home`} 
+          <NavItem
+            icon={Home}
+            text="Home"
+            to={`/barangay/${barangayData.barangayId}/home`}
           />
-          <NavItem 
-            icon={FileText} 
-            text="Documents" 
+          <NavItem
+            icon={FileText}
+            text="Documents"
             to={`/barangay/${barangayData.barangayId}/documents`}
           />
-          <NavItem 
-            icon={CheckCircle} 
-            text="Verification" 
+          <NavItem
+            icon={CheckCircle}
+            text="Verification"
             to={`/barangay/${barangayData.barangayId}/verification`}
           />
-          <NavItem 
-            icon={List} 
-            text="Requests" 
+          <NavItem
+            icon={List}
+            text="Requests"
             to={`/barangay/${barangayData.barangayId}/requests`}
           />
-          <NavItem 
-            icon={LogOut} 
-            text="Logout" 
-            to="/" 
-            onClick={handleLogout}
-          />
+          <NavItem icon={LogOut} text="Logout" to="/" onClick={handleLogout} />
         </nav>
 
         {/* Footer */}
