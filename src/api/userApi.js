@@ -22,7 +22,7 @@ const updateUser = async (userId, updateData) => {
                 'Content-Type': 'application/json',
             },
         });
-        return response;
+        return response.data;
     } catch (error) {
         if (error.response) {
             console.error('Validation Errors:', error.response.data.errors);
