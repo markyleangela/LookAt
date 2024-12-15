@@ -75,7 +75,7 @@ const Login = () => {
                     <button className='login-btn' type='submit'>Log In</button>
                 </form>
                 <p className='font-sans text-xl'>
-                    Don't have an account? <Link to='/register' className='signup-a'>Sign up here</Link>
+                    Don't have an account? <Link to='/register' className='login-a'>Sign up here</Link>
                 </p>
             </section>
         </div>

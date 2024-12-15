@@ -24,6 +24,13 @@ import BarangayVerification from './pages/barangayPage/BarangayVerification';
 import BarangayRequests from './pages/barangayPage/BarangayRequests';
 import BarangayDocuments from './pages/barangayPage/BarangayDocuments';
 import ProtectedRoute from './components/ProtectedRoute';
+import Request from './pages/requestPage/RequestPage';
+import { RequestProvider } from './pages/requestPage/RequestContext';
+import RequestPage_04 from './pages/requestPage/RequestPage_04';
+import RequestPage_05 from './pages/requestPage/RequestPage_05';
+
+import FirstVerification from './pages/Verification/Verification';
+ 
 
 // Import BarangayProvider
 import { BarangayProvider } from './contexts/BarangayContext';
@@ -34,6 +41,9 @@ function App() {
       <Routes>
         {/* Public routes */}
         <Route index element={<LandingPage />} />
+
+        <Route path="/verification" element={<FirstVerification />} />
+
         <Route path="/about" element={<About />} />
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
@@ -47,6 +57,20 @@ function App() {
         <Route path="/forgot-password-otp" element={<ForgotPasswordOTP />} />
         <Route path="/change-password" element={<ChangePassword />} />
         <Route path="*" element={<ErrorPage />} />
+
+        {/* Request-related routes wrapped in RequestProvider */}
+        <Route
+          path="/request/*"
+          element={
+            <RequestProvider>
+              <Routes>
+                <Route path="" element={<Request />} />
+                <Route path="04" element={<RequestPage_04 />} />
+                <Route path="05" element={<RequestPage_05 />} />
+              </Routes>
+            </RequestProvider>
+          }
+        />
 
         {/* Barangay-specific routes */}
         <Route path="/barangay/register" element={<BarangayRegister />} />

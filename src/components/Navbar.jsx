@@ -9,6 +9,7 @@ const Navbar = ({ title }) => {
     { name: 'Profile', path: '/profile' },
     { name: 'Help', path: '/help' },
     { name: 'Notifications', path: '/notifications' },
+    { name: 'Request', path: '/request'},
   ];
 
   const renderLinks = (className = '') =>
