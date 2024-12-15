@@ -3,6 +3,7 @@ import { RequestContext } from './RequestContext';
 
 const SummarySection = ({ address, receiver }) => {
   const { formBoxes } = useContext(RequestContext);
+  console.log(formBoxes);
 
   return (
     <div className="flex flex-col items-center justify-start max-w-[1000px] w-full px-4 mx-auto">

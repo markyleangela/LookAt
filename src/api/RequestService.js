@@ -38,9 +38,22 @@ const updateRequest = async (id, values) => {
     }
 }
 
+const createRequest = async (id, values) => {
+    try {
+        const response = await axios.post(`${API_URL}/Request/${id}` , values, {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+        });
+        return response.data;
+    } catch (error) {
+        handleError(error);
+    }
+}
+
 const requestService = {
     getRequestsByBarangayId,
-    updateRequest
+    updateRequest,
+    createRequest,
 };
 
 export default requestService;

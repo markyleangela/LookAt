@@ -24,15 +24,17 @@ const BarangayDocuments = () => {
 
   useEffect(() => {
       const fetchDocuments = async () => {
+        console.log(barangayData.barangayId)
         try {
-          const fetchedDocuments = await documentService.getDocument(barangayData.barangayId);
+          const fetchedDocuments = await documentService.getDocumentsByBarangay(barangayData.barangayId);
           setDocuments(fetchedDocuments);  // Store the documents in state
+          console.log(fetchedDocuments)
         } catch (error) {
           console.error('Error fetching documents:', error);
         }
       };
       fetchDocuments();
-  }, [barangayData, documents]);  // Run when barangayData changes
+  }, [barangayData]);  // Run when barangayData changes
 
   if (error) {
     return <div>Error: {error}</div>;

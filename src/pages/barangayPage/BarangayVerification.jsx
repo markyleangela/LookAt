@@ -44,15 +44,23 @@ const BarangayVerification = () => {
 
   const handleVerify = async (userId) => {
     try {
-      const updatedUser = await userApi.updateUser(userId, { isVerified: true });
+      // Include barangayId in the update request
+      const updatedUser = await userApi.updateUser(userId, { 
+        isVerified: true, 
+        barangayId: barangayData.barangayId  // Add barangayId here
+      });
+      
+      // Update the state with the verified user
       setUsers(users.map(user => 
         user.userId === userId ? { ...user, isVerified: true } : user
       ));
+      
       console.log('User verified:', updatedUser);
     } catch (error) {
       console.error('Error verifying user:', error);
     }
   };
+  
 
   if (error) {
     return <div>Error: {error}</div>;

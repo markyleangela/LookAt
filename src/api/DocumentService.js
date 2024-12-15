@@ -38,6 +38,19 @@ const getDocument = async (id) => {
     }
 };
 
+const getDocumentsByBarangay = async (id) => {
+    try {
+        const response = await axios.get(`${API_URL}/DocumentType/by/${id}`, {
+            withCredentials: true,
+        });
+        console.log(response.data);
+        return response.data;
+    } catch (error) {
+        handleError(error);
+        throw(error);
+    }
+}
+
 const  updateDocument = async (id, values) => {
     try {
         const response = await axios.put(`${API_URL}/DocumentType/${id}` , values, {
@@ -55,6 +68,7 @@ const documentService = {
     createDocument,
     getDocument,
     updateDocument,
+    getDocumentsByBarangay
 };
 
 export default documentService;
