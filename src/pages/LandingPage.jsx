@@ -17,7 +17,7 @@ const LandingPage = () => {
           <h3 className='statement-1'>Streamline Your Barangay Transactions with LookAt</h3>
           <hr />
           <p className='statement-2'>Experience fast, simple, and organized document processing. From applications to appointments, LookAt keeps everything at your fingertips.</p>
-          <Link to="/register">
+          <Link to="/user-or-barangay">
             <button className='get-started-btn'>Get Started</button>
           </Link>
           <p className='already-have-account'>Already have an account? <Link to="/login" className='login-a'>Login</Link></p>
