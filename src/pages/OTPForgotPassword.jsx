@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import '../styles/MobileVerification.css';
+import '../styles/EmailVerification.css';
 import Vector from '../assets/Vector.png';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import BackButton from '../components/BackButton';
 import PasswordVerify from '../api/passwordVerifyOtp'; // Import the VerifyOtp function
+import ForgotPassApi from '../api/forgotPassApi';
 
 const EmailVerification = () => {
     const [enteredCode, setEnteredCode] = useState('');  // State to store OTP input
@@ -63,6 +64,38 @@ const EmailVerification = () => {
         }
     };
 
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        // Basic validation to ensure fields aren't empty
+        if (!email) {
+            setErrorMessage('Please enter you email');
+            return;
+        }
+
+        // Prepare the login data
+        const userData = {
+            "email": email,
+        };
+
+        try {
+            // Send login request to the backend API
+            const response = await ForgotPassApi(userData)
+
+            if (response.status === 200) {
+                // On success, redirect to the dashboard or home page
+                navigate('/forgot-password-otp', {
+                    state: { email}
+                });
+            } else {
+                setErrorMessage('Invalid User ID or Password.');
+            }
+        } catch (error) {
+            setErrorMessage('No user found with this email');
+            console.error(error);
+        }
+    };
+
     return (
         <div className='mobile'>
             <header className='back-arrow'>
@@ -108,7 +141,7 @@ const EmailVerification = () => {
    
 
                 <p className='font-sans text-xl'>
-                    Didn't receive the code? <Link to='/resend-otp' className='login-a'>Tap here to resend</Link>
+                    Didn't receive the code? <button onClick={handleLogin} className='resend-btn'>Resend Code</button>
                 </p>
                 <button onClick={handleSubmit} className='verify-btn'>Verify</button>
                 {errorMessage && <p className='error-message'>{errorMessage}</p>}  {/* Display error if OTP is invalid */}
