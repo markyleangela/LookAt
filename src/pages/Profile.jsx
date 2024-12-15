@@ -3,7 +3,6 @@ import Navbar from '../components/Navbar'
 import '../styles/Profile.css'
 import { Link, useNavigate } from 'react-router-dom';
 import UserApi from '../api/userApi';
-import '../styles/Profile.css'
 
 const Profile = () => {
   const [firstName, setFirstName] = useState('');
