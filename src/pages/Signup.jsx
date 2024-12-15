@@ -36,7 +36,7 @@ const Signup = () => {
 
         try {
             // Use registerUser from UserApi
-            const response = await UserApi(userData);  // Call the function to register the user
+            const response = await UserApi.registerUser(userData);  // Call the function to register the user
             console.log(response.status)
             if (response.status === 200) {
                 // Pass the email and password to the email verification page

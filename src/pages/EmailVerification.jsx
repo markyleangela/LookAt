@@ -45,23 +45,8 @@ const EmailVerification = () => {
         console.log(typeof intCode)
 
         const userData = {
-            "userDto": {
-              "userId": 0,
-              "userName": "N/A",
-              "firstName": "N/A",
-              "lastName": "N/A",
-              "password": password,
-              "mobileNumber": "N/A",
-              "date": "2024-12-12T11:14:38.581Z",
-              "physicalIdNumber": "N/A",
-              "purok": "N/A",
-              "barangayLoc": "N/A",
-              "cityMunicipality": "N/A",
-              "province": "N/A",
-              "email": email,
-              "isVerified": true,
-              "barangayId": "N/A"
-            },
+            "email": email,
+            "password": password,
             "otp": intCode
           };
 

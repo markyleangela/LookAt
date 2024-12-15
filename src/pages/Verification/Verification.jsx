@@ -9,7 +9,7 @@ const FirstVerification = () => {
     const [currentLine, setCurrentLine] = useState(0);
     const navigate = useNavigate();
     const { id } = useParams();
-      const { user } = useUser(); // Access user data from context
+    const { user } = useUser(); // Access user data from context
 
     useEffect(() => {
         const stepElement = document.getElementById(`step-${currentLine}`);
