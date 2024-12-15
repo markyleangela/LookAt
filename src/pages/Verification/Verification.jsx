@@ -4,11 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import './Verification.css';
+import UserApi from '../../api/userApi';
+import { useUser } from '../../context/UserContext';
 
 const FirstVerification = () => {
     const [currentLine, setCurrentLine] = useState(0);
     const navigate = useNavigate();
     const { id } = useParams();
+    const { user, setUser } = useUser();
 
     useEffect(() => {
         const stepElement = document.getElementById(`step-${currentLine}`);
@@ -18,8 +21,8 @@ const FirstVerification = () => {
     }, [currentLine]);
 
     const validationSchema = Yup.object({
-        birthday: Yup.date()
-            .required('Birthday is required')
+        date: Yup.date()
+            .required('Birthdate is required')
             .test('age', 'You must be at least 18 years old', (value) => {
                 if (!value) return false;
                 const age = new Date().getFullYear() - new Date(value).getFullYear();
@@ -27,7 +30,7 @@ const FirstVerification = () => {
             }),
         acceptedId: Yup.string().required('ID selection is required'),
         faceScan: Yup.string().required('Face scan confirmation is required'),
-        confirmation: Yup.string().required('Confirmation is required'),
+        confirmation: Yup.boolean().oneOf([true], 'You must confirm the details') // Changed to a checkbox validation
     });
 
     const handleNext = () => {
@@ -37,12 +40,17 @@ const FirstVerification = () => {
     };
 
     const handleSubmit = async (values, { setSubmitting }) => {
+        console.log("Form is being submitted", values);  // Debugging the form submission
+
         try {
-            const userId = 1; // Replace with actual user ID if needed
-            // await updateUser(userId, values); // Uncomment and replace this with the actual API call
+            const response = await UserApi.updateUser(user.userId, values);
+            console.log(response.data); // Log the response from API
+            alert('Verification submitted successfully');
             navigate('/home');
         } catch (error) {
             console.error('Error submitting user:', error);
+            alert('Submission failed. Please try again.');
+        } finally {
             setSubmitting(false);
         }
     };
@@ -62,31 +70,32 @@ const FirstVerification = () => {
 
                 <Formik
                     initialValues={{
-                        birthday: '',
+                        date: '',
                         acceptedId: '',
                         faceScan: '',
-                        confirmation: '',
+                        confirmation: false, // Default to false
                     }}
                     validationSchema={validationSchema}
                     onSubmit={handleSubmit}
                 >
                     {({ errors, touched, isSubmitting }) => (
                         <Form>
+                            {/* Previous code remains the same */}
                             <div className="verification_content">
                                 <h1>Tell us about yourself</h1>
                                 <p>Please complete the information below.</p>
 
-                                {/* Step 1: Birthday */}
+                                {/* Step 1: date */}
                                 {currentLine === 0 && (
                                     <div>
-                                        <h2><label htmlFor="birthday">Birthday</label></h2>
+                                        <h2><label htmlFor="date">Birthdate</label></h2>
                                         <Field
                                             type="date"
-                                            id="birthday"
-                                            name="birthday"
+                                            id="date"
+                                            name="date"
                                         />
-                                        {errors.birthday && touched.birthday && (
-                                            <div className="error-message">{errors.birthday}</div>
+                                        {errors.date && touched.date && (
+                                            <div className="error-message">{errors.date}</div>
                                         )}
                                         <hr className="age-line"></hr>
                                     </div>
@@ -151,21 +160,33 @@ const FirstVerification = () => {
                                     </div>
                                 )}
 
-                                {/* Step 4: Confirmation */}
-                                {currentLine === 3 && (
-                                    <div>
-                                        <h2 style={{ color: "#0AD1C8" }}>Congratulations!</h2>
-                                        <p className="congratulations-text">You are now in line for verification, a confirmation message will be sent as soon as possible.</p>
-                                        <div className="image-container">
-                                            <img 
-                                                src={require('../../assets/congratulation_image.png')} 
-                                                alt="Done" 
-                                                className="congratulation_image" 
-                                            />
-                                        </div>
+                            {/* Step 4: Confirmation */}
+                            {currentLine === 3 && (
+                                <div>
+                                    <h2 style={{ color: "#0AD1C8" }}>Congratulations!</h2>
+                                    <p className="congratulations-text">You are now in line for verification, a confirmation message will be sent as soon as possible.</p>
+                                    <div className="image-container">
+                                        <img 
+                                            src={require('../../assets/congratulation_image.png')} 
+                                            alt="Done" 
+                                            className="congratulation_image" 
+                                        />
                                     </div>
-                                )}
-                            </div>
+                                    
+                                    {/* Add confirmation checkbox */}
+                                    <div>
+                                        <Field 
+                                            type="checkbox" 
+                                            name="confirmation" 
+                                            id="confirmation"
+                                        />
+                                        <label htmlFor="confirmation">I confirm all details are correct</label>
+                                        {errors.confirmation && touched.confirmation && (
+                                            <div className="error-message">{errors.confirmation}</div>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
 
                             {/* Button for each step */}
                             {currentLine !== 3 && (
@@ -183,10 +204,12 @@ const FirstVerification = () => {
                                 <button
                                     type="submit"
                                     className="submit_button"
+                                    disabled={isSubmitting}
                                 >
                                     Submit
                                 </button>
                             )}
+                            </div>
                         </Form>
                     )}
                 </Formik>
