@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import barangayService from '../../api/barangayService';
+import barangayService from '../../api/BarangayService';
 import { Link } from 'react-router-dom'
 
 export const BarangayRegister = () => {

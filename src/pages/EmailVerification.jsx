@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import '../styles/MobileVerification.css';
+import '../styles/EmailVerification.css';
 import MessageIcon from '../assets/message.png';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import BackButton from '../components/BackButton';
 import VerifyOtp from '../api/verifyOtp'; // Import the VerifyOtp function
+import UserApi from '../api/userApi';
 
 const EmailVerification = () => {
     const [enteredCode, setEnteredCode] = useState('');  // State to store OTP input
@@ -80,6 +81,35 @@ const EmailVerification = () => {
         }
     };
 
+    const handleResend = async (e) => {
+        e.preventDefault();
+    
+        if (!email || !password) {
+            setErrorMessage('Email or password is missing. Cannot resend code.');
+            return;
+        }
+    
+        console.log('Resending OTP for Email:', email);
+    
+        const userData = {
+            email,
+            password
+        };
+    
+        try {
+            const response = await UserApi(userData); // Call the resend API
+            if (response.status === 200) {
+                console.log('OTP Resent Successfully');
+            } else {
+                setErrorMessage('Failed to resend OTP. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error while resending OTP:', error);
+            setErrorMessage('Something went wrong. Please try again.');
+        }
+    };
+    
+
     return (
         <div className='mobile'>
             <header className='back-arrow'>
@@ -125,7 +155,7 @@ const EmailVerification = () => {
    
 
                 <p className='font-sans text-xl'>
-                    Didn't receive the code? <Link to='/resend-otp' className='login-a'>Tap here to resend</Link>
+                    Didn't receive the code? <button onClick={handleResend} className='resend-btn'>Resend Code</button>
                 </p>
                 <button onClick={handleSubmit} className='verify-btn'>Verify</button>
                 {errorMessage && <p className='error-message'>{errorMessage}</p>}  {/* Display error if OTP is invalid */}

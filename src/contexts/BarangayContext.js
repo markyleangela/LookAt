@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import barangayService from '../api/barangayService';
+import barangayService from '../api/BarangayService';
 
 export const BarangayContext = createContext({
   barangayData: null,
