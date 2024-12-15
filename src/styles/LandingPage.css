@@ -9,14 +9,11 @@
     background-position: center; 
     margin: 0;
     width: 100%;
-    height: 100%; 
+    height: 100vh; 
     overflow: hidden;
     padding: 35px;
     padding-left: 100px;
     font-family: 'Poppins', sans-serif;
-    
-  
-    
   }
   
   header {
@@ -24,10 +21,7 @@
     color: #000000;
     padding: 50px 0;
     padding: 20px;
-    
   }
-
-
 
   .navbar {
     display: flex;
@@ -43,6 +37,7 @@
     height: auto;
     width: 200px;
   }
+
   .logo {
     
     align-self: flex-start;
@@ -59,7 +54,6 @@
     left: 0; 
     padding: 10px; 
     width: 30%;
-
     
   }
 
