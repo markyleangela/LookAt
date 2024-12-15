@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../assets/Logo.png';
+import { useUser } from '../context/UserContext'; // Import the custom hook to access the user context
 
 const Navbar = ({ title }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, setUserData } = useUser(); // Access the user data from context
+
+  // If user is not logged in, fallback to empty string or "guest" or handle accordingly
+  const userNumber = user?.userId || ''; 
 
   const navLinks = [
-    { name: 'Profile', path: '/profile' },
-    { name: 'Help', path: '/help' },
-    { name: 'Notifications', path: '/notifications' },
-    { name: 'Request', path: '/request'},
+    { name: 'Profile', path: `/${userNumber}/profile` },
+    { name: 'Help', path: `/${userNumber}/help` },
+    { name: 'Notifications', path: `/${userNumber}/notifications` },
+    { name: 'Request', path: `/${userNumber}/request` },
   ];
 
   const renderLinks = (className = '') =>
@@ -23,6 +28,12 @@ const Navbar = ({ title }) => {
         </Link>
       </li>
     ));
+
+  // Logout function
+  const handleLogout = () => {
+    setUserData(null); // Clear user data from context
+    localStorage.removeItem('userId'); // Remove from localStorage if you use it
+  };
 
   return (
     <nav className="relative flex items-center bg-white px-6 md:px-12 lg:px-24 py-4 border-b border-accent2">
@@ -63,6 +74,21 @@ const Navbar = ({ title }) => {
             <ul className="flex text-gray-800 font-bold text-lg lg:text-xl space-x-4 md:space-x-10 lg:space-x-16">
               {renderLinks()}
             </ul>
+          </div>
+
+          <div className="md:hidden lg:hidden flex justify-end">
+            {user ? (
+              <button
+                className="text-gray-800 font-bold"
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
+            ) : (
+              <Link to="/login" className="text-gray-800 font-bold">
+                Login
+              </Link>
+            )}
           </div>
 
           <button
