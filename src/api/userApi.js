@@ -22,6 +22,7 @@ const updateUser = async (userId, updateData) => {
                 'Content-Type': 'application/json',
             },
         });
+        console.log(response.data);
         return response.data;
     } catch (error) {
         if (error.response) {
@@ -47,10 +48,23 @@ const getUser = async (id) => {
     }
 };
 
+const getAllUsers = async () => {
+    try {
+        const response = await axios.get(`https://localhost:7213/api/User`, {
+            withCredentials: true,
+        });
+        return response;
+    } catch (error) {
+        console.error(error.response ? error.response.data : error.message);
+        throw error;
+    }
+};
+
 const userApi = {
     registerUser,
     updateUser,
-    getUser
+    getUser,
+    getAllUsers
 }
 
 

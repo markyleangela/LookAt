@@ -31,7 +31,7 @@ const DocumentRequestForm = () => {
 
   useEffect(() => {
     // Check if user is verified, if not, redirect to verification page
-    if (user && user.isVerified) {
+    if (user && !user.isVerified) {
       navigate(`/${user.userId}/verification`);
     }
   }, [user, navigate]);

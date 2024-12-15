@@ -11,6 +11,7 @@ const FirstVerification = () => {
         idType: '',
         physicalIdNumber: '',
         confirmation: '',
+        barangayLoc: '',
     });
     const [errors, setErrors] = useState({});
 
@@ -169,25 +170,44 @@ const FirstVerification = () => {
 
                         {/* Step 3: Physical ID Number */}
                         {currentLine === 2 && (
-                            <div>
-                                <h2 className="text-2xl text-accent1 font-bold">Physical ID Number</h2>
-                                <p>Please input the physical ID number from your selected ID.</p>
-                                <div className="my-5 flex justify-center">
-                                    <input
-                                        type="text"
-                                        name="physicalIdNumber"
-                                        value={formData.physicalIdNumber}
-                                        onChange={handleChange}
-                                        placeholder="Enter Physical ID Number"
-                                        className="w-full max-w-xs p-2 border border-gray-300 rounded-md"
-                                    />
-                                    {errors.physicalIdNumber && (
-                                        <div className="text-red-600 text-sm">{errors.physicalIdNumber}</div>
-                                    )}
-                                </div>
-                                <hr className="w-full h-[5px] bg-accent1 mt-2" />
+                        <div>
+                            <h2 className="text-2xl text-accent1 font-bold">Physical ID Number</h2>
+                            <p>Please input the physical ID number from your selected ID.</p>
+                            <div className="my-5 flex justify-center">
+                                <input
+                                    type="text"
+                                    name="physicalIdNumber"
+                                    value={formData.physicalIdNumber}
+                                    onChange={handleChange}
+                                    placeholder="Enter Physical ID Number"
+                                    className="w-full max-w-xs p-2 border border-gray-300 rounded-md"
+                                />
+                                {errors.physicalIdNumber && (
+                                    <div className="text-red-600 text-sm">{errors.physicalIdNumber}</div>
+                                )}
                             </div>
-                        )}
+
+                            {/* New field for Barangay Location */}
+                            <h2 className="text-2xl text-accent1 font-bold">Barangay Location</h2>
+                            <p>Please enter your Barangay location.</p>
+                            <div className="my-5 flex justify-center">
+                                <input
+                                    type="text"
+                                    name="barangayLoc"
+                                    value={formData.barangayLoc}
+                                    onChange={handleChange}
+                                    placeholder="Enter Barangay Location"
+                                    className="w-full max-w-xs p-2 border border-gray-300 rounded-md"
+                                />
+                                {errors.barangayLoc && (
+                                    <div className="text-red-600 text-sm">{errors.barangayLoc}</div>
+                                )}
+                            </div>
+
+                            <hr className="w-full h-[5px] bg-accent1 mt-2" />
+                        </div>
+                    )}
+
 
                         {/* Step 4: Confirmation */}
                         {currentLine === 3 && (

@@ -20,6 +20,7 @@ const Profile = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
+  // Update state when user context changes
   useEffect(() => {
     if (user) {
       setFirstName(user.firstName);
@@ -48,10 +49,10 @@ const Profile = () => {
   
     try {
       const response = await UserApi.updateUser(userId, updateData);
-      if (response.status === 200) {
+      if (response) {
         setSuccessMessage('Profile updated successfully!');
         setErrorMessage('');
-        console.log('Update response:', response.data);
+        console.log('Update response:', response);
         
         // After successful update, refresh the user context
         setUser({
