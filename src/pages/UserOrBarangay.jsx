@@ -8,7 +8,7 @@ const UserOrBarangay = () => {
                 <h2>Sign Up as...</h2>
             </div>
             <div className='w-full h-4/5 flex gap-10'>
-                <div className='flex-1 bg-accent2 rounded-lg h-4/5'>
+                <div className='flex-1 bg-accent2 hover:bg-opacity-50 rounded-lg h-4/5'>
                     <Link to="/register">
                         <button className='w-full h-full flex lg:flex-col items-center md:flex-row sm:flex-row'>
                             <svg className='w-full h-4/5' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -18,7 +18,7 @@ const UserOrBarangay = () => {
                         </button>
                     </Link>
                 </div>
-                <div className='flex-1 bg-accent2 rounded-lg h-4/5'>
+                <div className='flex-1 bg-accent2 hover:bg-opacity-50 rounded-lg h-4/5'>
                     <Link to="/barangay/register">
                     <button className='w-full h-full flex lg:flex-col items-center md:flex-row'>
                             <svg className='w-full h-4/5' viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
