@@ -11,6 +11,9 @@ import ErrorPage from './pages/ErrorPage';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import EmailVerification from './pages/EmailVerification';
+import ForgotPassword from './pages/ForgotPassword';
+import  ForgotPasswordOTP from './pages/OTPForgotPassword';
+import  ChangePassword from './pages/ChangePassword';
 import AccountCreated from './pages/AccountCreated';
 import Help from './pages/Help';
 import Notifications from './pages/Notifications';
@@ -26,6 +29,9 @@ import { RequestProvider } from './pages/requestPage/RequestContext';
 import RequestPage_04 from './pages/requestPage/RequestPage_04';
 import RequestPage_05 from './pages/requestPage/RequestPage_05';
 
+import FirstVerification from './pages/Verification/Verification';
+ 
+
 // Import BarangayProvider
 import { BarangayProvider } from './contexts/BarangayContext';
 
@@ -35,6 +41,9 @@ function App() {
       <Routes>
         {/* Public routes */}
         <Route index element={<LandingPage />} />
+
+        <Route path="/verification" element={<FirstVerification />} />
+
         <Route path="/about" element={<About />} />
         <Route path="/home" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
@@ -44,6 +53,9 @@ function App() {
         <Route path="/register" element={<Signup />} />
         <Route path="/email-verification" element={<EmailVerification />} />
         <Route path="/account-created" element={<AccountCreated />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/forgot-password-otp" element={<ForgotPasswordOTP />} />
+        <Route path="/change-password" element={<ChangePassword />} />
         <Route path="*" element={<ErrorPage />} />
 
         {/* Request-related routes wrapped in RequestProvider */}

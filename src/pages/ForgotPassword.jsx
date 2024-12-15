@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import '../styles/Login.css';
-import PersonGear from '../assets/person-gear.png';
 import { Link, useNavigate } from 'react-router-dom';
 import BackButton from '../components/BackButton';
-import LoginApi from '../api/loginApi'; // Import the API to make the login request
+import ForgotPassApi from '../api/forgotPassApi'; // Import the API to make the login request
+import Vector from '../assets/Vector.png'
 
-const Login = () => {
+const ForgotPassword = () => {
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate(); // To navigate after login
 
@@ -15,29 +14,30 @@ const Login = () => {
         e.preventDefault();
 
         // Basic validation to ensure fields aren't empty
-        if (!email || !password) {
-            setErrorMessage('Please enter both User ID and Password.');
+        if (!email) {
+            setErrorMessage('Please enter you email');
             return;
         }
 
         // Prepare the login data
-        const loginData = {
+        const userData = {
             "email": email,
-            "password": password
         };
 
         try {
             // Send login request to the backend API
-            const response = await LoginApi(loginData)
+            const response = await ForgotPassApi(userData)
 
             if (response.status === 200) {
                 // On success, redirect to the dashboard or home page
-                navigate('/home');
+                navigate('/forgot-password-otp', {
+                    state: { email}
+                });
             } else {
                 setErrorMessage('Invalid User ID or Password.');
             }
         } catch (error) {
-            setErrorMessage('Something went wrong. Please try again.');
+            setErrorMessage('No user found with this email');
             console.error(error);
         }
     };
@@ -48,38 +48,26 @@ const Login = () => {
                 <BackButton />
             </header>
             <section className='content'>
-                <img src={PersonGear} alt="Icon" />
-                <h1 className='font-sans text-xl'>Log In</h1>
+                <img src={Vector} alt="Icon" />
+                <h1 className='font-sans text-xl'>Forgot Password</h1>
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
                 <form onSubmit={handleLogin}>
                     <label>Email</label>
                     <input
                         className='user-id'
-                        placeholder='Enter your email address'
+                        placeholder='Enter email'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <label>Password</label>
-                    <input
-                        className='password'
-                        type="password"
-                        placeholder='Enter your Password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                    <Link to='/forgot-password' className='forgot-pass'>
-                        <label>Forgot password?</label>
-                    </Link>
+                    
 
                     
-                    <button className='login-btn' type='submit'>Log In</button>
+                    <button className='login-btn' type='submit'>Continue</button>
                 </form>
-                <p className='font-sans text-xl'>
-                    Don't have an account? <Link to='/register' className='login-a'>Sign up here</Link>
-                </p>
+              
             </section>
         </div>
     );
 };
 
-export default Login;
+export default ForgotPassword;
