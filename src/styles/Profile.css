@@ -34,15 +34,19 @@
     padding-top: 170px;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-    background-color: #064553;
+    /* background-color: #064553; */
+    background-image: url('../assets/profile-bg.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center; 
 }
 
 .profile-image {
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
     justify-self: center;
     border-radius: 50%;
-    border: 5px solid #064553;
+    border: 2px solid #064553;
     margin: -110px 0 10px 0;
 }
 
@@ -63,12 +67,12 @@
 
 /* Info rows */
 .profile-info {
+    padding: 0 5%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
     gap: 15px;
-    padding: 0 5%;
 }
 
 .left-profile, .right-profile {
