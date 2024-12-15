@@ -3,101 +3,114 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 .landing-page {
-    background-image: url('../assets/cover.png');
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    background-position: center; 
-    margin: 0;
-    width: 100%;
-    height: 100vh; 
-    overflow: hidden;
-    padding: 35px;
-    padding-left: 100px;
-    font-family: 'Poppins', sans-serif;
-  }
+  background-image: url('../assets/cover.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: right;
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  padding: 35px;
+  padding-left: 100px;
+  font-family: 'Poppins', sans-serif;
+}
+
+header {
+  color: #000000;
+  padding: 50px 0;
+  padding: 20px;
+}
+
+.navbar {
+  display: flex;
   
-  header {
-    background-color: #FFFFFF;
-    color: #000000;
-    padding: 50px 0;
-    padding: 20px;
-  }
+  top: 0; 
+  left: 0; 
+  padding: 10px; 
+  width: 100%;
 
-  .navbar {
-    display: flex;
-    
-    top: 0; 
-    left: 0; 
-    padding: 10px; 
-    width: 100%;
+}
 
-  }
+.navbar img {
+  height: auto;
+  width: 200px;
+}
+
+.logo {
   
-  .navbar img {
-    height: auto;
-    width: 200px;
-  }
+  align-self: flex-start;
+}
 
-  .logo {
-    
-    align-self: flex-start;
-  }
+.cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: justify;
   
-  .cta {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    text-align: justify;
-    
-    top: 0; 
-    left: 0; 
-    padding: 10px; 
-    width: 30%;
-    
-  }
+  top: 0; 
+  left: 0; 
+  padding: 10px; 
+  width: 40%;
+}
 
-  .cta h3 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    text-align: left;
-    font-family: 'Poppins', sans-serif;
-  }
-
-    
-  .cta p {
-    font-size: 1.2rem;
-    text-align: left;
-    font-family: 'Poppins', sans-serif;
-  }
-
-
-  .get-started-btn {
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    background-color: #0B6477;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 15px;
-    width: 100%;
-  }
-
-  .get-started-btn:hover {
-    background-color: #0AD1C8;
-  }
-
-  .login-a {
-    color:#0B6477 ;
-  }
+.cta h3 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+}
   
+.cta p {
+  font-size: 1.2rem;
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+}
 
-  
+.cta a {
+  width: 100%;
+}
 
-  footer {
-    margin-top: 50px;
-    font-size: 1rem;
-    color: #555;
-  }
+.statement-2 {
+  margin-bottom: 40px;
+}
 
-  
+.already-have-account {
+  width: 100%;
+  text-align: center !important;
+}
+
+.get-started-btn {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  background-color: #0B6477;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 15px;
+  width: 100%;
+}
+
+hr {
+  width: 100%;
+  height: 10px;
+  border-radius: 20px;
+  background-color: #000000;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.get-started-btn:hover {
+  background-color: #0AD1C8;
+}
+
+.login-a {
+  color:#0B6477 ;
+}
+
+footer {
+  margin-top: 50px;
+  font-size: 1rem;
+  color: #555;
+}
