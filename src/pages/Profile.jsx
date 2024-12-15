@@ -1,107 +1,84 @@
-import React, { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
-import '../styles/Profile.css'
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import Navbar from '../components/Navbar';
+import '../styles/Profile.css';
+import { useNavigate } from 'react-router-dom';
 import UserApi from '../api/userApi';
+import { useUser } from '../context/UserContext';  // Import the useUser hook
 
 const Profile = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [userId, setUserId] = useState('');
+  const { user, setUser } = useUser(); // Access the user data and setter function from context
 
-  const [mobileNumber, setMobileNumber] = useState('');
-  const [birthdate, setBirthdate] = useState('');
-  const [email, setEmail] = useState('');
-  const [province, setProvince] = useState('');
-  const [municipality, setMunicipality] = useState('');
-  const [barangay, setBarangay] = useState('');
-  const [purok, setPurok] = useState('');
-  const [zipCode, setZipCode] = useState('');
+  const [firstName, setFirstName] = useState(user?.firstName || ''); 
+  const [lastName, setLastName] = useState(user?.lastName || '');
+  const [userId, setUserId] = useState(user?.userId || '');
+
+  const [email, setEmail] = useState(user?.email || '');
+  const [province, setProvince] = useState(user?.province || '');
+  const [cityMunicipality, setCityMunicipality] = useState(user?.cityMunicipality || '');
+  const [barangayLoc, setBarangayLoc] = useState(user?.barangayLoc || '');
+  const [purok, setPurok] = useState(user?.purok || '');
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const navigate = useNavigate(); 
 
   useEffect(() => {
-    const fetchUserData = async () => {
-        try {
-            const response = await UserApi.getUser(); 
-            if (response.status === 200) {
-                const userData = response.data;
-                setFirstName(userData.firstName);
-                setLastName(userData.lastName);
-                setUserId(userData.userId);
-
-                setMobileNumber(userData.mobileNumber);
-                setBirthdate(userData.birthdate);
-                setEmail(userData.email);
-                setProvince(userData.province);
-                setMunicipality(userData.municipality);
-                setBarangay(userData.barangay);
-                setPurok(userData.purok);
-                setZipCode(userData.zipCode);
-            }
-        } catch (error) {
-            console.error('Error fetching user data:', error);
-        }
-    };
-
-    fetchUserData();
-    // const mockUserData = {
-    //   firstName: 'Karylle',
-    //   lastName: 'Delos Reyes',
-    //   userId: '12345',
-    // };
-
-    // setFirstName(mockUserData.firstName);
-    // setLastName(mockUserData.lastName);
-    // setUserId(mockUserData.userId);
-  }, []);
+    if (user) {
+      setFirstName(user.firstName);
+      setLastName(user.lastName);
+      setUserId(user.userId);
+      setEmail(user.email);
+      setProvince(user.province);
+      setCityMunicipality(user.cityMunicipality);
+      setBarangayLoc(user.barangayLoc);
+      setPurok(user.purok);
+    }
+  }, [user]);  // This will trigger when the user context changes
 
   const handleUpdate = async (e) => {
-      e.preventDefault();
-
-      if (!mobileNumber || !birthdate || ! email || !province || !municipality || !barangay || !purok || !zipCode) {
-          setErrorMessage('Please enter valid user data.');
-          return;
+    e.preventDefault();
+  
+    const updateData = {
+      firstName,
+      lastName,
+      email,
+      province,
+      cityMunicipality,
+      barangayLoc,
+      purok,
+    };
+  
+    try {
+      const response = await UserApi.updateUser(userId, updateData);
+      if (response.status === 200) {
+        setSuccessMessage('Profile updated successfully!');
+        setErrorMessage('');
+        console.log('Update response:', response.data);
+        
+        // After successful update, refresh the user context
+        setUser({
+          ...user,
+          ...updateData, // Update context with the new data
+        });
+      } else {
+        setErrorMessage('Failed to update profile. Please try again.');
       }
-
-      const updateData = {
-          mobileNumber,
-          birthdate,
-          email,
-          province,
-          municipality, 
-          barangay, 
-          purok, 
-          zipCode
-      };
-
-      try {
-        const response = await UserApi.updateUser(updateData);
-
-        if (response.status === 200) {
-          setSuccessMessage('Profile updated successfully!');
-          setErrorMessage('');
-          console.log('Update response:', response.data);
-          navigate('/profile')
-        } else {
-          setErrorMessage('Failed to update profile. Please try again.');
-        }
-      } catch (error) {
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      if (error.response) {
+        console.error('Response error data:', error.response.data);
+        setErrorMessage(`Error: ${error.response.data.message || 'Please try again later.'}`);
+      } else {
         setErrorMessage('Something went wrong. Please try again later.');
-        console.error('Error updating profile:', error);
       }
+    }
   };
-
-
+  
   return (
     <>
       <Navbar title="Profile"/>
       <div>
         <div className="profile-page">
-          {/* Profile Card */}
           <div className="profile-card">
-            <form action="" onSubmit={handleUpdate}>
+            <form onSubmit={handleUpdate}>
               <div className="profile-header">
                 <div className="profile-image-container">
                 </div>
@@ -115,15 +92,13 @@ const Profile = () => {
                   <p>{userId}</p>  
                 </div>
               </div>
-            {/* Profile Info */}
               <div className="profile-info">
                 <div className="left-profile">
                   <div className="info-row">
-                    <label htmlFor="mobile_no" className='info-label'>Mobile Number</label>
+                    <label htmlFor="first_name" className='info-label'>First Name</label>
                     <input className='info-value'
-                        // placeholder='Enter your user ID'
-                        value={mobileNumber}
-                        onChange={(e) => setMobileNumber(e.target.value)}
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
                     />
                   </div>
 
@@ -138,10 +113,10 @@ const Profile = () => {
                   <div className="info-row">
                     <label htmlFor="address" className='info-label'>Municipality</label>
                     <input className='info-value'
-                        value={municipality}
-                        onChange={(e) => setMunicipality(e.target.value)}
+                        value={cityMunicipality}
+                        onChange={(e) => setCityMunicipality(e.target.value)}
                     />
-                  </div>  
+                  </div>    
 
                   <div className="info-row">
                     <label htmlFor="address" className='info-label'>Purok</label>
@@ -154,11 +129,10 @@ const Profile = () => {
                 
                 <div className="right-profile">
                   <div className="info-row">
-                    <label htmlFor="birthdate" className='info-label'>Birthdate</label>
+                    <label htmlFor="last_name" className='info-label'>Last Name</label>
                     <input className='info-value'
-                        type="date"
-                        value={birthdate}
-                        onChange={(e) => setBirthdate(e.target.value)}
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
                     />
                   </div>
 
@@ -173,21 +147,14 @@ const Profile = () => {
                   <div className="info-row">
                     <label htmlFor="address" className='info-label'>Barangay</label>
                     <input className='info-value'
-                        value={barangay}
-                        onChange={(e) => setBarangay(e.target.value)}
+                        value={barangayLoc}
+                        onChange={(e) => setBarangayLoc(e.target.value)}
                     />
                   </div>
-                  
-                  <div className="info-row">
-                    <label htmlFor="address" className='info-label'>Zip Code</label>
-                    <input className='info-value'
-                        value={zipCode}
-                        onChange={(e) => setZipCode(e.target.value)}
-                    />
-                  </div>
+
                 </div> 
               </div>
-              {/* Update Button */}
+
               {errorMessage && <p className="error-message">{errorMessage}</p>}
               {successMessage && <p className="success-message">{successMessage}</p>}
               <button type="submit" className="update-button">Update Profile Information</button>  
@@ -196,7 +163,7 @@ const Profile = () => {
         </div>  
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

@@ -24,17 +24,21 @@ const updateUser = async (userId, updateData) => {
         });
         return response;
     } catch (error) {
-        console.error(error.response ? error.response.data : error.message);
+        if (error.response) {
+            console.error('Validation Errors:', error.response.data.errors);
+            console.error('Full error response:', error.response);
+        } else {
+            console.error(error.message);
+        }
         throw error;
     }
 };
 
-const getUser = async () => {
+
+const getUser = async (id) => {
     try {
-        const response = await axios.get('https://localhost:7213/api/User/me', {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            },
+        const response = await axios.get(`https://localhost:7213/api/User/${id}`, {
+            withCredentials: true,
         });
         return response;
     } catch (error) {
@@ -43,5 +47,11 @@ const getUser = async () => {
     }
 };
 
+const userApi = {
+    registerUser,
+    updateUser,
+    getUser
+}
 
-export default {registerUser, updateUser, getUser};
+
+export default userApi;

@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PurposeSection from './RequestPage_01';
 import AddressSection from './RequestPage_02';
 import ReceivingSection from './RequestPage_03';
 import DocumentType from './RequestPage_04';
 import SummarySection from './RequestPage_05';
+import { useUser } from '../../context/UserContext'; // Import the useUser hook
 
 const DocumentRequestForm = () => {
   const navigate = useNavigate();
+  const { user } = useUser(); // Access user data from context
 
-  const [currentSection, setCurrentSection] = useState(0); 
+  const [currentSection, setCurrentSection] = useState(0);
 
   const [purpose, setPurpose] = useState(localStorage.getItem('purpose'));
 
@@ -27,6 +29,13 @@ const DocumentRequestForm = () => {
   const [documents, setDocuments] = useState([]);
   const [isDocumentValid, setIsDocumentValid] = useState(false);
 
+  useEffect(() => {
+    // Check if user is verified, if not, redirect to verification page
+    if (user && user.isVerified) {
+      navigate(`/${user.userId}/verification`);
+    }
+  }, [user, navigate]);
+
   // Next button logic
   const handleNext = () => {
     if (currentSection < 4) {
@@ -36,14 +45,12 @@ const DocumentRequestForm = () => {
 
   // Prev button logic
   const handleBack = () => {
-
     if (currentSection > 0) {
       setCurrentSection(currentSection - 1);
     } else {
       localStorage.clear(); // Clear all data from localStorage
       navigate('/home'); // Navigate to home page when already on the first section
     }
-
   };
 
   // Submit request logic TO BE DONE
@@ -148,16 +155,13 @@ const DocumentRequestForm = () => {
         ) : (
           <button
             onClick={handleNext}
-            className={`bg-accent1 text-white font-semibold py-2 px-4 rounded-full w-32 ${
-              isNextDisabled() ? 'opacity-50' : 'hover:bg-accent2'
-            }`}
+            className={`bg-accent1 text-white font-semibold py-2 px-4 rounded-full w-32 ${isNextDisabled() ? 'opacity-50' : 'hover:bg-accent2'}`}
             disabled={isNextDisabled()} // Disable based on section validation
           >
             Next
           </button>
         )}
       </div>
-
     </div>
   );
 };

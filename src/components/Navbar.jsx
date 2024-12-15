@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo.png';
-import { useUser } from '../context/UserContext'; // Import the custom hook to access the user context
+import { useUser } from '../context/UserContext';
 
 const Navbar = ({ title }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, setUserData } = useUser(); // Access the user data from context
+  const { user, logoutUser } = useUser();
+  const navigate = useNavigate();
 
   // If user is not logged in, fallback to empty string or "guest" or handle accordingly
   const userNumber = user?.userId || ''; 
@@ -31,8 +32,8 @@ const Navbar = ({ title }) => {
 
   // Logout function
   const handleLogout = () => {
-    setUserData(null); // Clear user data from context
-    localStorage.removeItem('userId'); // Remove from localStorage if you use it
+    logoutUser();
+    navigate('/login');
   };
 
   return (
@@ -66,14 +67,22 @@ const Navbar = ({ title }) => {
         </div>
       ) : (
         <>
-          <Link to="/home" aria-label="Home" className="flex-1">
+          <Link to={`/${user.userId}/home`} aria-label="Home" className="flex-1">
             <img src={Logo} alt="Website Logo" className="h-10 md:h-12 lg:h-16 w-auto p-1" />
           </Link>
 
-          <div className="hidden md:flex lg:flex justify-end">
+          <div className="hidden md:flex lg:flex items-center justify-end space-x-4">
             <ul className="flex text-gray-800 font-bold text-lg lg:text-xl space-x-4 md:space-x-10 lg:space-x-16">
               {renderLinks()}
             </ul>
+            {user && (
+              <button
+                onClick={handleLogout}
+                className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors"
+              >
+                Logout
+              </button>
+            )}
           </div>
 
           <div className="md:hidden lg:hidden flex justify-end">
@@ -115,6 +124,13 @@ const Navbar = ({ title }) => {
           {isMenuOpen && (
             <ul className="absolute top-full left-0 w-full bg-white shadow-md z-50 flex flex-col p-4 space-y-4 text-gray-800 font-bold text-lg md:hidden">
               {renderLinks('border-b pb-2 last:border-b-0')}
+              {user && (
+                <li className="border-b pb-2">
+                  <button onClick={handleLogout} className="w-full text-left">
+                    Logout
+                  </button>
+                </li>
+              )}
             </ul>
           )}
         </>
