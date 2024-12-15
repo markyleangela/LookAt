@@ -21,6 +21,10 @@ import BarangayVerification from './pages/barangayPage/BarangayVerification';
 import BarangayRequests from './pages/barangayPage/BarangayRequests';
 import BarangayDocuments from './pages/barangayPage/BarangayDocuments';
 import ProtectedRoute from './components/ProtectedRoute';
+import Request from './pages/requestPage/RequestPage';
+import { RequestProvider } from './pages/requestPage/RequestContext';
+import RequestPage_04 from './pages/requestPage/RequestPage_04';
+import RequestPage_05 from './pages/requestPage/RequestPage_05';
 
 // Import BarangayProvider
 import { BarangayProvider } from './contexts/BarangayContext';
@@ -41,6 +45,20 @@ function App() {
         <Route path="/mobile-verification" element={<MobileVerification />} />
         <Route path="/account-created" element={<AccountCreated />} />
         <Route path="*" element={<ErrorPage />} />
+
+        {/* Request-related routes wrapped in RequestProvider */}
+        <Route
+          path="/request/*"
+          element={
+            <RequestProvider>
+              <Routes>
+                <Route path="" element={<Request />} />
+                <Route path="04" element={<RequestPage_04 />} />
+                <Route path="05" element={<RequestPage_05 />} />
+              </Routes>
+            </RequestProvider>
+          }
+        />
 
         {/* Barangay-specific routes */}
         <Route path="/barangay/register" element={<BarangayRegister />} />
