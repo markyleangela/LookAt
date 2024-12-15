@@ -88,6 +88,7 @@ const FirstVerification = () => {
                                         {errors.birthday && touched.birthday && (
                                             <div className="error-message">{errors.birthday}</div>
                                         )}
+                                        <hr className="age-line"></hr>
                                     </div>
                                 )}
 
@@ -135,15 +136,18 @@ const FirstVerification = () => {
                                                 alt="Camera Frame" 
                                                 className="camera_frame_image" 
                                             />
+                                            <div className="placeholder_scan">
+                                                <Field
+                                                    type="text"
+                                                    name="faceScan"
+                                                    placeholder="Enter face scan confirmation"
+                                                />
+                                                {errors.faceScan && touched.faceScan && (
+                                                    <div className="error-message">{errors.faceScan}</div>
+                                                )}
+                                            </div>
+
                                         </div>
-                                        <Field
-                                            type="text"
-                                            name="faceScan"
-                                            placeholder="Enter face scan confirmation"
-                                        />
-                                        {errors.faceScan && touched.faceScan && (
-                                            <div className="error-message">{errors.faceScan}</div>
-                                        )}
                                     </div>
                                 )}
 
