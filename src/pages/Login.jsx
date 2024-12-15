@@ -6,7 +6,7 @@ import BackButton from '../components/BackButton';
 import LoginApi from '../api/loginApi'; // Import the API to make the login request
 
 const Login = () => {
-    const [userId, setUserId] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate(); // To navigate after login
@@ -15,24 +15,27 @@ const Login = () => {
         e.preventDefault();
 
         // Basic validation to ensure fields aren't empty
-        if (!userId || !password) {
+        if (!email || !password) {
             setErrorMessage('Please enter both User ID and Password.');
             return;
         }
 
         // Prepare the login data
         const loginData = {
-            userId,
-            password,
+            "email": email,
+            "password": password
         };
 
         try {
             // Send login request to the backend API
-            const response = await LoginApi(userId,loginData); // Assuming `login` is a method in `userApi`
+            const response = await LoginApi(loginData);
 
             if (response.status === 200) {
-                // On success, redirect to the dashboard or home page
-                navigate('/home');
+                // Assuming the response contains userId
+                const userId = response.data.userId;
+                console.log(userId);
+                // On success, redirect to the user's home page with their ID in the URL
+                navigate(`/${userId}/home`);
             } else {
                 setErrorMessage('Invalid User ID or Password.');
             }
@@ -52,12 +55,12 @@ const Login = () => {
                 <h1 className='font-sans text-xl'>Log In</h1>
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
                 <form onSubmit={handleLogin}>
-                    <label>User ID</label>
+                    <label>Email</label>
                     <input
                         className='user-id'
-                        placeholder='Enter your user ID'
-                        value={userId}
-                        onChange={(e) => setUserId(e.target.value)}
+                        placeholder='Enter your email address'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     <label>Password</label>
                     <input
@@ -67,14 +70,14 @@ const Login = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <Link to='/signup' className='forgot-pass'>
+                    <Link to='/forgot-password' className='forgot-pass'>
                         <label>Forgot password?</label>
                     </Link>
 
                     <button className='login-btn' type='submit'>Log In</button>
                 </form>
                 <p className='font-sans text-xl'>
-                    Don't have an account? <Link to='/register' className='signup-a'>Sign up here</Link>
+                    Don't have an account? <Link to='/register' className='login-a'>Sign up here</Link>
                 </p>
             </section>
         </div>
