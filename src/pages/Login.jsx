@@ -28,11 +28,14 @@ const Login = () => {
 
         try {
             // Send login request to the backend API
-            const response = await LoginApi(loginData)
+            const response = await LoginApi(loginData);
 
             if (response.status === 200) {
-                // On success, redirect to the dashboard or home page
-                navigate('/home');
+                // Assuming the response contains userId
+                const userId = response.data.userId;
+                console.log(userId);
+                // On success, redirect to the user's home page with their ID in the URL
+                navigate(`/${userId}/home`);
             } else {
                 setErrorMessage('Invalid User ID or Password.');
             }
@@ -71,7 +74,6 @@ const Login = () => {
                         <label>Forgot password?</label>
                     </Link>
 
-                    
                     <button className='login-btn' type='submit'>Log In</button>
                 </form>
                 <p className='font-sans text-xl'>

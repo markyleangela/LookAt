@@ -43,13 +43,13 @@ function App() {
         {/* Public routes */}
         <Route index element={<LandingPage />} />
 
-        <Route path="/verification" element={<FirstVerification />} />
+        <Route path="/<:id>/verification" element={<FirstVerification />} />
 
-        <Route path="/about" element={<About />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/help" element={<Help />} />
-        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/<:id>/about" element={<About />} />
+        <Route path="/<:id>/home" element={<Home />} />
+        <Route path="/<:id>/profile" element={<Profile />} />
+        <Route path="/<:id>/help" element={<Help />} />
+        <Route path="/<:id>/notifications" element={<Notifications />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Signup />} />
         <Route path="/email-verification" element={<EmailVerification />} />
