@@ -28,6 +28,7 @@ import Request from './pages/requestPage/RequestPage';
 import { RequestProvider } from './pages/requestPage/RequestContext';
 import RequestPage_04 from './pages/requestPage/RequestPage_04';
 import RequestPage_05 from './pages/requestPage/RequestPage_05';
+import AcceptedRequests from './components/request/AcceptedRequest';
 
 import FirstVerification from './pages/Verification/Verification';
  
@@ -115,6 +116,14 @@ function App() {
                   element={
                     <ProtectedRoute>
                       <BarangayVerification />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route 
+                  path="/:id/requests/all"
+                  element={
+                    <ProtectedRoute>
+                      <AcceptedRequests/>
                     </ProtectedRoute>
                   }
                 />

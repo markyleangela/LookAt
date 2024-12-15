@@ -47,6 +47,7 @@ const DocumentCard = ({ document }) => {
           </div>
           {/* Content Section */}
           <div className="flex flex-col justify-center items-center flex-1 mt-4">
+          <p className="font-semibold text-lg">Document ID: {document.documentId}</p>
             <p className="font-semibold text-lg">{document.price?.toFixed(1) || "0.00"}</p>
             <p className={`text-sm mt-2 ${document.isAvailable ? "text-green-600" : "text-red-600"}`}>
               {document.isAvailable ? "Available" : "Not Available"}
